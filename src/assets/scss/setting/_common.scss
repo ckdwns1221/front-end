@@ -1,6 +1,8 @@
 body {
     margin: 0 auto;
-    width: 390px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 360px;
     height: 100vh;
     background-color: var(--white);
     font-family: var(--mainfont);
