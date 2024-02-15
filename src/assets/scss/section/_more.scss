@@ -1,0 +1,24 @@
+.more_wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--maincolor01);
+    
+}
+
+.more_header{
+    display: flex;
+    align-items: center;
+    margin-top: 6rem;
+    justify-content: center;
+    
+    
+}
+.goBack_img{
+    margin-right: 0.5rem;
+    width: auto;
+    height: auto;
+}

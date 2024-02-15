@@ -10,12 +10,17 @@ import Videopage from './components/Videopage/Videopage'
 import JoinCollect from './components/Join/JoinCollect'
 import LoginCollect from './components/Login/LoginCollect'
 import TimesetStart from './components/Timeset/TimesetStart'
-
+import MoreRecommend from './components/Main/MoreRecommend'
+import MoreScrab from './components/Main/MoreScrab'
+import Favorite from './components/Favorite/FavoritePage'
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Main />} />
+        <Route path='/aboutRecommend' element={<MoreRecommend />} />
+        <Route path='/aboutScrab' element={<MoreScrab />} />
+        <Route path='/favorite' element={<Favorite />} />
 
         <Route path='/login' element={< Login />} />
         <Route path='/logincollect' element={< LoginCollect />} />
