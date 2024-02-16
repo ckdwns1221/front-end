@@ -14,7 +14,6 @@ function MoreRecommend() {
     }
     return (
         <div className='main_wrap'>
-
             <div style={{marginBottom:30}}>
                 <div className='more_header'>
                     <Link to='/'><img src={goback} className='goBack_img' /></Link>
