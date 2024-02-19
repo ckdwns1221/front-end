@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Main from './components/Main/Main'
 import Login from './components/Login/Login'
@@ -13,11 +13,13 @@ import TimesetStart from './components/Timeset/TimesetStart'
 import MoreRecommend from './components/Main/MoreRecommend'
 import MoreScrab from './components/Main/MoreScrab'
 import Favorite from './components/Favorite/FavoritePage'
+import History from './components/Mypage/History/History'
+
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<Main/>} />
         <Route path='/aboutRecommend' element={<MoreRecommend />} />
         <Route path='/aboutScrab' element={<MoreScrab />} />
         <Route path='/favorite' element={<Favorite />} />
@@ -29,6 +31,7 @@ const App = () => {
         <Route path='/joincollect' element={< JoinCollect />} />
 
         <Route path='/mypage' element={< Mypage />} />
+        <Route path='/mypage/:userid/:date' element={<History/> }/>
 
         <Route path='/startpage' element={< Startpage />} />
 
