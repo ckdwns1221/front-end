@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import Main from './components/Main/Main'
 import Login from './components/Login/Login'
 import Join from './components/Join/Join'
@@ -15,10 +17,14 @@ import MoreScrab from './components/Main/More/MoreScrab'
 import Favorite from './components/Favorite/FavoritePage'
 import History from './components/Mypage/History/History'
 import VideoDetail from './components/Videopage/VideoDetail'
+import Testfetch from './components/Login/fetchtest'
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
       <Routes>
         <Route path='/' element={<Main/>} />
         <Route path='/aboutRecommend' element={<MoreRecommend />} />
@@ -42,8 +48,12 @@ const App = () => {
 
         <Route path='/videopage' element={< Videopage />} />
         <Route path='/videopage/:videoId' element={< VideoDetail />} />
+
+        <Route path='/test' element={<Testfetch/> } />
       </Routes>
     </BrowserRouter>
+    </QueryClientProvider>
+    
   )
 }
 
