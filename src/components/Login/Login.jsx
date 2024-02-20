@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom'
 import logoImage from '../../assets/img/logo.png'
 import eyeOpenImage from '../../assets/img/login_eye_open.svg'
 import eyeClosedImage from '../../assets/img/login_eye_closed.svg'
 import ScrollTop from '../../utils/ScrollTop';
 import Nav from '../Nav/Nav'
+import axios from 'axios'
 
-const User = {
-  id: 'test1234',
-  pw: 'test1234@@'
-}
+const useLoginMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (userData) => axios.post('https://3.34.197.56:443/api/users/login', userData),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('userData');
+      },
+    }
+  );
+};
 
 export default function Login() {
   const [id, setId] = useState('');
@@ -47,13 +57,23 @@ export default function Login() {
       setPwValid(false);
     }
   };
-  const onClickConfirmButton = () => {
-    if(id === User.id && pw === User.pw) {
-      alert('로그인에 성공했습니다.')
-    } else {
-      alert("등록되지 않은 회원입니다.");
+
+  const loginMutation = useLoginMutation();
+
+  const onClickConfirmButton = async () => {
+    const userData = {
+      userId: id,
+      userPw: pw,
+    };
+
+    try {
+      await loginMutation.mutateAsync(userData);
+      alert('로그인에 성공했습니다.');
+    } catch (error) {
+      alert('로그인에 실패했습니다. 다시 시도해주세요.');
     }
-  }
+  };
+
 
   return (
     <>
@@ -107,7 +127,7 @@ export default function Login() {
             )}
           </div>
         </div>
-        <Link to='/logincollect'>
+        <Link to='/'>
           <button onClick={onClickConfirmButton} disabled={notAllow} className="bottomButton">
             확인
           </button>
