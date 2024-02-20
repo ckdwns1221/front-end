@@ -1,49 +1,102 @@
-.join_wrap {
-    padding: 60px 30px;
+.join-container {
+  min-height: 100vh;
+  padding: 40px 30px 0;
+  margin-top: 30px;
 
-    h2 {
-        font-size: 25px;
-        font-weight: 900;
+  .join-header {
+    height: 30%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #93988F;
+
+    img {
+        width: 40px;
     }
 
-    .join {
-        padding-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
+    .join-text {
+      font-weight: bolder;
+      font-size: 20px;
+      margin: 7px 5px 0;
+    }
+  }
 
-        input {
-            border-radius: 10px;
-            padding: 18px 20px 14px;
-            width: 100%;
-            border: 2px solid var(--black500);
-            outline: none;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
+  .join-input {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
 
-        ::placeholder {
-            font-size: 15px;
-        }
-
-        >div {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        
-            input {
-                width: 81%;
-            }
-
-            button {
-                background-color: var(--maincolor02);
-                width: 17%;
-                height: 54px;
-                border-radius: 10px;
-            }
-        }
+    .input-header {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    
+    .input-title{
+      font-size: 12px;
+      font-weight: bold;
+      color: #262626;
+      margin-top: 20px;
     }
 
-    .submit {
+    .input-wrap {
+      display: flex;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 8px;
+      background-color: white;
+      border: 1px solid #e2e0e0;
+
+      .input {
+        width: 100%;
+        outline: none;
+        border: none;
+        height: 17px;
+        font-size: 14px;
+      }
+      
+      ::placeholder {
+        color: #dadada;
+      }
+    }
+      
+    :focus-within {
+      border: 1px solid #FF6D6D;
+    }
+    
+    .useId {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #ef0000;
+    }
+
+    .pweyes {
+      position: relative;
+      width: 100%;
+      
+      button {
+        background-image: url(../../img/login_eye_closed.svg);
+        background-repeat: no-repeat;
+        background-color: #00000000;
+        background-size: cover;
+        position: absolute;
+        width: 21px;
+        height: 21px;
+        right:15px;
+        border: none;
+        transform: translateY(-10%);
+          }
+      }
+    }
+
+    .errorMessageWrap {
+      margin-top: 8px;
+      color: #ef0000;
+      font-size: 12px;
+    }
+
+    .bottomButton {
         width: 100%;
         background-color: var(--maincolor01);
         padding: 18px 0 15px;
@@ -51,6 +104,27 @@
         color: var(--white);
         font-size: 15px;
         font-weight: 700;
+        margin: 20px 0 8px;
+    }
+
+    :disabled {
+      background-color: #dadada;
+      color: white;
+    }
+    .goLoginWrap {
+      display: flex; 
+      justify-content: center;     
+      align-items: center; 
+      margin-top: 15px;
+      font-size: 13px;
+      font-weight: 700;
+
+      .goToLogin {
+          display: flex;
+          justify-content: center;
+          color: var(--maincolor01);
+          margin-left: 7px;
+      }
     }
 }
 
@@ -78,8 +152,18 @@
     }
 
     p {
+        font-weight: 700;
         font-size: 22px;
         color: var(--black300);
         margin-bottom: 60px;
+
+        strong {
+            font-weight: 900;
+        }
+
+        i {
+            color: var(--maincolor02);
+            font-weight: 900;
+        }
     }
 }
