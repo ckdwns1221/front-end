@@ -14,6 +14,7 @@ import MoreRecommend from './components/Main/More/MoreRecommend'
 import MoreScrab from './components/Main/More/MoreScrab'
 import Favorite from './components/Favorite/FavoritePage'
 import History from './components/Mypage/History/History'
+import VideoDetail from './components/Videopage/VideoDetail'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/aboutRecommend' element={<MoreRecommend />} />
         <Route path='/aboutScrab' element={<MoreScrab />} />
         <Route path='/favorite' element={<Favorite />} />
+        <Route path='/' element={<Main />} />
 
         <Route path='/login' element={< Login />} />
         <Route path='/logincollect' element={< LoginCollect />} />
@@ -39,6 +41,7 @@ const App = () => {
         <Route path='/timesetplace' element={< TimesetStart />} />
 
         <Route path='/videopage' element={< Videopage />} />
+        <Route path='/videopage/:videoId' element={< VideoDetail />} />
       </Routes>
     </BrowserRouter>
   )
