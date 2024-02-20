@@ -39,9 +39,9 @@ figcaption {
 }
 
 // 폰트 초기화 
+/* input 제거, 폰트에서 문자를 지원하지 않아서 password가 안보임 */
 body,
 button,
-input,
 select,
 table,
 textarea {

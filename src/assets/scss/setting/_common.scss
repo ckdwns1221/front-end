@@ -1,10 +1,14 @@
 @media (min-width: 375px) {
-    #root{
+    #root,
+    .Nav,
+    .showNav{
         width: 375px;
     }
 }
 @media (max-width:500px) {
-    #root{
+    #root,
+    .Nav,
+    .showNav{
         width: 100vw;
     }
 }
@@ -21,8 +25,6 @@
 body {
     background-color: var(--white);
     font-family: var(--mainfont);
-    // 화면 구분이 잘 안되서 추가했습니다.
-    box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
 }
 
 button {

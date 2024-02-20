@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom'
 import logoImage from '../../assets/img/logo.png'
 import eyeOpenImage from '../../assets/img/login_eye_open.svg'
 import eyeClosedImage from '../../assets/img/login_eye_closed.svg'
+import ScrollTop from '../../utils/ScrollTop';
+import Nav from '../Nav/Nav'
+import axios from 'axios'
 
 const User = {
-  nickname: 'nickname',
+  displayName: 'user1',
   id: 'test1234',
   pw: 'test1234@@',
   pwCheck: 'test1234@@'
@@ -13,43 +16,56 @@ const User = {
 
 
 export default function Join() {
-  const [nickname, setNickname] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwCheck, setPwCheck] = useState('');
 
-  const [nicknameValid, setNicknameValid] = useState(false);
+  const [displayNameValid, setDisplayNameValid] = useState(false);
   const [idValid, setIdValid] = useState(false);
   const [pwValid, setPwValid] = useState(false);
   const [pwCheckValid, setPwCheckValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
 
+  const [idDuplicate, setIdDuplicate] = useState(false); // 아이디 중복 여부를 저장하는 state
   const [pwVisible, setPwVisible] = useState(false);
   const [pwCheckVisible, setPwCheckVisible] = useState(false);
 
   useEffect(() => {
-    if(nicknameValid && idValid && pwValid && pwCheckValid) {
+    if(displayNameValid && idValid && pwValid && pwCheckValid) {
       setNotAllow(false);
       return;
     }
     setNotAllow(true);
-  }, [nicknameValid, idValid, pwValid, pwCheckValid]);
+  }, [displayNameValid, idValid, pwValid, pwCheckValid]);
 
   const handleNickname = (e) => {
-    setNickname(e.target.value);
+    setDisplayName(e.target.value);
     const regex =
     /(?=.*[a-zA-Z가-힣])[a-zA-Z가-힣0-9]+$/;
     if (regex.test(e.target.value)) {
-      setNicknameValid(true);
+      setDisplayNameValid(true);
     } else {
-      setNicknameValid(false);
+      setDisplayNameValid(false);
     }
   };
-  const handleId = (e) => {
+  const handleId = async (e) => {
     setId(e.target.value);
     const regex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/;
     if (regex.test(e.target.value)) {
       setIdValid(true);
+
+      // 아이디 중복 검사를 위한 서버 API 호출
+      try {
+        const response = await axios.get(`/api/checkIdDuplicate/${e.target.value}`);
+        if(response.data.isDuplicate) {
+          setIdDuplicate(true); // 중복된 아이디가 있다면 true
+        } else {
+          setIdDuplicate(false); // 중복된 아이디가 없다면 false
+        }
+      } catch(err) {
+        console.error(err); // 에러 처리
+      }
     } else {
       setIdValid(false);
     }
@@ -81,92 +97,97 @@ export default function Join() {
   }
 
   return (
-    <div className="join-container">
-      <div className="join-header">
-        <img src={logoImage} alt="logo" />
-        <div className="join-text">
-          틈새시간, 손틈새로
-        </div>
-      </div>
-      <div className="join-input">
-        <div className="input-header">
-          회원가입
-        </div>
-        <div className="input-title">별명</div>
-        <div className="input-wrap">
-          <input
-            className="input"
-            type="text"
-            placeholder="nickname"
-            value={nickname}
-            onChange={handleNickname}
-          />
-        </div>
-        <div className="input-title">아이디</div>
-        <div className="input-wrap">
-          <input
-            className="input"
-            type="text"
-            placeholder="ID"
-            value={id}
-            onChange={handleId}/>
-        </div>
-        <div className="input-title">
-          비밀번호
-        </div>
-        <div className="input-wrap pweyes">
-          <input
-            className="input"
-            type={pwVisible ? "text" : "password"}
-            placeholder="Password"
-            value={pw}
-            onChange={handlePw} />
-           <button 
-            style={{ backgroundImage: `url(${pwVisible ? eyeOpenImage : eyeClosedImage})` }} 
-            onClick={() => setPwVisible(!pwVisible)}
-          />
-        </div>
-        <div className="errorMessageWrap">
-          {!pwValid && pw.length > 0 && (
-            <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
-          )}
-        </div>
-        <div className="input-title">
-          비밀번호 확인
-        </div>
-        <div className="input-wrap pweyes" >
-          <input
-            className="input"
-            type={pwCheckVisible ? "text" : "password"}
-            placeholder="Password Confirm"
-            value={pwCheck}
-            onChange={handlePwCheck} />
-           <button 
-            style={{ backgroundImage: `url(${pwCheckVisible ? eyeOpenImage : eyeClosedImage})` }} 
-            onClick={() => setPwCheckVisible(!pwCheckVisible)}
-          />
-        </div>
-        <div className="errorMessageWrap">
-          {!pwCheckValid && pwCheck.length > 0 && (
-            <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
-          )}
-        </div>
-      </div>
-      <div>
-        <Link to='/login'>
-          <button onClick={onClickConfirmButton} disabled={notAllow} className="bottomButton">
-            확인
-          </button>
-        </Link>
-      </div>
-      <div className="goLoginWrap">
-        이미 가입하셨나요? 
-        <Link to='/join'>
-          <div className="goToLogin">
-            로그인 하러가기
+    <>
+      <Nav />
+      <div className="join-container">
+        <div className="join-header">
+          <img src={logoImage} alt="logo" />
+          <div className="join-text">
+            틈새시간, 손틈새로
           </div>
-        </Link>
+        </div>
+        <div className="join-input">
+          <div className="input-header">
+            회원가입
+          </div>
+          <div className="input-title">별명</div>
+          <div className="input-wrap">
+            <input
+              className="input"
+              type="text"
+              placeholder="nickname"
+              value={displayName}
+              onChange={handleNickname}
+            />
+          </div>
+          <div className="input-title">아이디</div>
+          <div className="input-wrap">
+            <input
+              className="input"
+              type="text"
+              placeholder="ID"
+              value={id}
+              onChange={handleId}/>
+          </div>
+          {id && (idDuplicate ? <div className='useId'>이미 사용 중인 아이디입니다.</div> : <div className='useId'>사용 가능한 아이디입니다.</div>)}
+          <div className="input-title">
+            비밀번호
+          </div>
+          <div className="input-wrap pweyes">
+            <input
+              className="input"
+              type={pwVisible ? "text" : "password"}
+              placeholder="Password"
+              value={pw}
+              onChange={handlePw} />
+            <button 
+              style={{ backgroundImage: `url(${pwVisible ? eyeOpenImage : eyeClosedImage})` }} 
+              onClick={() => setPwVisible(!pwVisible)}
+            />
+          </div>
+          <div className="errorMessageWrap">
+            {!pwValid && pw.length > 0 && (
+              <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
+            )}
+          </div>
+          <div className="input-title">
+            비밀번호 확인
+          </div>
+          <div className="input-wrap pweyes" >
+            <input
+              className="input"
+              type={pwCheckVisible ? "text" : "password"}
+              placeholder="Password Confirm"
+              value={pwCheck}
+              onChange={handlePwCheck} />
+            <button 
+              style={{ backgroundImage: `url(${pwCheckVisible ? eyeOpenImage : eyeClosedImage})` }} 
+              onClick={() => setPwCheckVisible(!pwCheckVisible)}
+            />
+          </div>
+          <div className="errorMessageWrap">
+            {!pwCheckValid && pwCheck.length > 0 && (
+              <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
+            )}
+          </div>
+        </div>
+        <div>
+          <Link to='/login'>
+            <button onClick={onClickConfirmButton} disabled={notAllow} className="bottomButton">
+              확인
+            </button>
+          </Link>
+        </div>
+        <div className="goLoginWrap">
+          이미 가입하셨나요? 
+          <Link to='/login'>
+            <div className="goToLogin">
+              로그인 하러가기
+            </div>
+          </Link>
+        </div>
       </div>
-    </div>
+      <ScrollTop />
+    </>
   );
 }
