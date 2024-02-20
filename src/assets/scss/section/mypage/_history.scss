@@ -8,24 +8,27 @@
 
         .header-date {
             font-weight: 900;
+            font-size: 2.2rem;
         }
 
         .header-user {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #93988F;
             font-weight: 600;
         }
     }
 
     .history-content-wrap {
-        background-color: #f6bebe;
+        background-color: #fbdcdc;
         border-radius: 20px;
         padding: 20px;
+        padding-top: 3px;
         margin-top: 20px;
         .history-content-title {
             font-size: 1.2rem;
-            font-weight: 700;
+            font-weight: 900;
             color: #93988F;
+            margin-top: 20px;
         }
         .history-runtime{
             text-align: right;
