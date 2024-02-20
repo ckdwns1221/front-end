@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom'
 import logoImage from '../../assets/img/logo.png'
 import eyeOpenImage from '../../assets/img/login_eye_open.svg'
@@ -14,6 +15,19 @@ const User = {
   pwCheck: 'test1234@@'
 }
 
+const useSignUpMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (userData) => axios.post('https://3.34.197.56:443/api/users/signup', userData),
+    {
+      onSuccess: () => {
+        // Invalidate and refetch any queries related to user data after successful signup
+        queryClient.invalidateQueries('userData');
+      },
+    }
+  );
+};
 
 export default function Join() {
   const [displayName, setDisplayName] = useState('');
@@ -30,6 +44,8 @@ export default function Join() {
   const [idDuplicate, setIdDuplicate] = useState(false); // 아이디 중복 여부를 저장하는 state
   const [pwVisible, setPwVisible] = useState(false);
   const [pwCheckVisible, setPwCheckVisible] = useState(false);
+
+  
 
   useEffect(() => {
     if(displayNameValid && idValid && pwValid && pwCheckValid) {
@@ -56,6 +72,7 @@ export default function Join() {
       setIdValid(true);
 
       // 아이디 중복 검사를 위한 서버 API 호출
+      /*
       try {
         const response = await axios.get(`/api/checkIdDuplicate/${e.target.value}`);
         if(response.data.isDuplicate) {
@@ -68,6 +85,7 @@ export default function Join() {
       }
     } else {
       setIdValid(false);
+    */
     }
   };
   const handlePw = (e) => {
@@ -88,13 +106,33 @@ export default function Join() {
       setPwCheckValid(false);
     }
   };
+  /*
   const onClickConfirmButton = () => {
     if(id === User.id && pw === User.pw) {
       alert('회원가입에 성공했습니다.')
     } else {
       alert("기입하신 정보를 다시 확인해주세요.");
     }
-  }
+  }*/
+
+  const signUpMutation = useSignUpMutation();
+
+  const onClickConfirmButton = async () => {
+    const userData = {
+      userId: id,
+      userName: displayName,
+      userPw: pw,
+    };
+
+    try {
+      await signUpMutation.mutateAsync(userData);
+      alert('회원가입에 성공했습니다.');
+    } catch (error) {
+      alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  
 
   return (
     <>
