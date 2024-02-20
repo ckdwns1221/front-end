@@ -50,6 +50,7 @@ function Favorite() {
   }
   function handleFavoriteSubmit(event){
     event.preventDefault();
+    //api 호출
   }
   return (
     <form onSubmit={handleFavoriteSubmit}>
