@@ -60,9 +60,7 @@
         margin-bottom: 10px;
         width: 100%;
         height: 100%;
-        background-color: #f2f7fe;
         border-radius: 10px;
-        
         
         .histroy-content-footer{
             display: flex;
@@ -104,11 +102,12 @@
         height: 0;
         padding-bottom: 56.25%; 
         overflow: hidden;
+        .react-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     }
 
-    .react-player {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
+    
 }

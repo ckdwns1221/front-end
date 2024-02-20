@@ -28,7 +28,7 @@ const dummydata = [{
 ]
 
 
-function HistoryContentItem() {
+function HistoryContentItem({onClick,bookMarkIs}) {
   return (
     <ul className='history-content-wrap'>
       {dummydata.map((dummy) => (
@@ -55,7 +55,7 @@ function HistoryContentItem() {
                 <p className='history-footer-category'>{dummy.category}</p>
                 <p className='history-footer-title'>{dummy.title}</p>
               </div>
-              <img className='history-bookmark' src={bookmark_notactivity} alt='bookmark_notactivity' />
+              {bookMarkIs? <img className='history-bookmark' src={bookmark_activity} alt='bookmark_notactivity' onClick={onClick}/> : <img className='history-bookmark' src={bookmark_notactivity} alt='bookmark_activity' onClick={onClick}/>}
             </div>
           </li >
         </>

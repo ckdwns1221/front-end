@@ -5,6 +5,27 @@ import goback from '../../assets/img/goBack.png';
 import bookmark_activity from '../../assets/img/bookmark_activity.png';
 import bookmark_notactivity from '../../assets/img/bookmark_notactivity.png'
 
+const dummydata = [{
+    id: 1,
+    category: '경제/금융',
+    title: '주식으로 돈 버는법',
+    videoUrl: 'https://youtu.be/CTpbD4Y0IFU?si=ja7sjUW1vzZ7fEaq',
+    time: '13',
+  }, {
+    id: 2,
+    category: '마케팅',
+    title: '소비자의 마음을 사로잡는 커피',
+    videoUrl: 'https://youtu.be/kHp6qLsyu-U?si=_MM6lyoDBycnLiZH',
+    time: '18',
+  },
+  {
+    id: 3,
+    category: '마케팅',
+    title: '4P, 3C? 시장분석 용어정리',
+    videoUrl: 'https://youtu.be/kHp6qLsyu-U?si=_MM6lyoDBycnLiZH',
+    time: '18',
+  },
+  ]
 
 function MoreRecommend() {
     const [bookMarkIs, setBookMarkIs] = useState(false);
