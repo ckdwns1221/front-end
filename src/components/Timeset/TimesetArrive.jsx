@@ -4,6 +4,7 @@ import 'swiper/css/pagination';
 import TimesetSwiper from './TimesetETC/TimesetSwiper'
 import TimesetMap from './TimesetETC/TimesetMap'
 import TimesetRetrun from './TimesetETC/TimesetRetrun';
+import { Map } from "react-kakao-maps-sdk";
 
 const TimesetArrive = ({ choosearrive, setChoosearrive, setAll }) => {
     const [show, setShow] = useState(false)
@@ -20,9 +21,11 @@ const TimesetArrive = ({ choosearrive, setChoosearrive, setAll }) => {
         <div className='timeset_wrap'>
             <TimesetRetrun setAll={setAll} props={'도착지'} />
             <TimesetMap setShow={setShow} choose={choose} show={show} choosearrive={choosearrive} props={'도착지'} />
-            <div className="choose_start">
-                {/* 지도 들어가는 자리입니다 */}
-            </div>
+            <Map
+                center={{ lat: 37.506320759000715, lng: 127.05368251210247 }}
+                className='choose_start'
+            >
+            </Map>
             <TimesetSwiper show={show} setChoose={setChoose} setAll={setAll} />
         </div>
     )
