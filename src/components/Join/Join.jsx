@@ -22,7 +22,6 @@ const useSignUpMutation = () => {
     (userData) => axios.post('https://3.34.197.56:443/api/users/signup', userData),
     {
       onSuccess: () => {
-        // Invalidate and refetch any queries related to user data after successful signup
         queryClient.invalidateQueries('userData');
       },
     }
