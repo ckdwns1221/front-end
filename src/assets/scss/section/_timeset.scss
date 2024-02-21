@@ -82,6 +82,21 @@
             }
         }
 
+        .search {
+            margin-top: 20px;
+            width: 100%;
+            align-items: center;
+
+            input {
+                width: 79%;
+            }
+
+            button {
+                margin-top: 0;
+                width: 20%;
+            }
+        }
+
         button {
             margin-top: 40px;
         }
