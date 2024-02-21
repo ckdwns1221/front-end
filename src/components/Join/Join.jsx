@@ -8,13 +8,6 @@ import ScrollTop from '../../utils/ScrollTop';
 import Nav from '../Nav/Nav'
 import axios from 'axios'
 
-const User = {
-  displayName: 'user1',
-  id: 'test1234',
-  pw: 'test1234@@',
-  pwCheck: 'test1234@@'
-}
-
 const useSignUpMutation = () => {
   const queryClient = useQueryClient();
 
@@ -40,7 +33,6 @@ export default function Join() {
   const [pwCheckValid, setPwCheckValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
 
-  const [idDuplicate, setIdDuplicate] = useState(false); // 아이디 중복 여부를 저장하는 state
   const [pwVisible, setPwVisible] = useState(false);
   const [pwCheckVisible, setPwCheckVisible] = useState(false);
 
@@ -64,27 +56,13 @@ export default function Join() {
       setDisplayNameValid(false);
     }
   };
-  const handleId = async (e) => {
+  const handleId = (e) => {
     setId(e.target.value);
     const regex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/;
     if (regex.test(e.target.value)) {
       setIdValid(true);
-
-      // 아이디 중복 검사를 위한 서버 API 호출
-      /*
-      try {
-        const response = await axios.get(`/api/checkIdDuplicate/${e.target.value}`);
-        if(response.data.isDuplicate) {
-          setIdDuplicate(true); // 중복된 아이디가 있다면 true
-        } else {
-          setIdDuplicate(false); // 중복된 아이디가 없다면 false
-        }
-      } catch(err) {
-        console.error(err); // 에러 처리
-      }
     } else {
       setIdValid(false);
-    */
     }
   };
   const handlePw = (e) => {
@@ -105,14 +83,6 @@ export default function Join() {
       setPwCheckValid(false);
     }
   };
-  /*
-  const onClickConfirmButton = () => {
-    if(id === User.id && pw === User.pw) {
-      alert('회원가입에 성공했습니다.')
-    } else {
-      alert("기입하신 정보를 다시 확인해주세요.");
-    }
-  }*/
 
   const signUpMutation = useSignUpMutation();
 
@@ -166,7 +136,11 @@ export default function Join() {
               value={id}
               onChange={handleId}/>
           </div>
-          {id && (idDuplicate ? <div className='useId'>이미 사용 중인 아이디입니다.</div> : <div className='useId'>사용 가능한 아이디입니다.</div>)}
+          <div className="errorMessageWrap">
+            {!idValid && id.length > 0 && (
+              <div>영문, 숫자 포함 6자 이상 입력해주세요.</div>
+            )}
+          </div>
           <div className="input-title">
             비밀번호
           </div>
