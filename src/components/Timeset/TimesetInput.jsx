@@ -4,7 +4,7 @@ const TimesetInput = ({ time, setTime, setWitch, witch }) => {
 
     const onSubmit = () => {
         if (!(time)) {
-            alert("시간을 입력해주세요!")
+            alert("시간을 입력ㄱ해주세요!")
             return
         }
         setWitch(true)
@@ -14,7 +14,7 @@ const TimesetInput = ({ time, setTime, setWitch, witch }) => {
         <div className='userinput'>
             {witch ? (
                 <>
-                    <p>{time}분 <strong>소요</strong></p>
+                    <p>{time}분  <strong>소요</strong></p>
                 </>
             ) : (
                 <>
