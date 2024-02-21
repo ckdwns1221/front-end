@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useNavigation } from 'react-router-dom'
 import ReactPlayer from 'react-player'
+import { useQuery,useQueryClient } from 'react-query'
+import axios from 'axios'
 
 import logoImage from '../../assets/img/logo.png'
 import Human from '../../assets/img/main_human.svg'
 import MainMoreItems from './MainMoreItems'
-
+import UserInfo from '../../store/UserInfo'
+import { fetchUserInfo } from '../../api/fetchUserInfo'
+import fetchRecommend from '../../api/mainpage/fetchRecommend'
 const dummydata = [{
     id: 1,
     category: '경제/금융',
@@ -26,11 +30,13 @@ const dummydata = [{
     videoUrl: 'https://youtu.be/kHp6qLsyu-U?si=_MM6lyoDBycnLiZH',
     time: '18',
 },
-
 ]
 
 const Main = () => {
     const [plusIs, setPlusIs] = useState(false);
+    const {data,isLoading,error} = useQuery('userInfomation',()=> fetchUserInfo('lhj6364'))
+    const [RecommendList,setRecommendList] = useState([])
+    
     const navigate = useNavigate()
     function handlePlusIs() {
         setPlusIs(!plusIs)
@@ -38,6 +44,31 @@ const Main = () => {
     function handleFavorite() {
         navigate('/favorite');
     }
+    
+    console.log(JSON.stringify(data,null,2))
+    useEffect(()=>{
+        const fetchRecommendData = async() =>{
+            const {userId,time} = data.data
+            console.log("userid:", userId)
+            const timeSecond = time*60
+            try{
+                const response = await fetchRecommend({userId,timeSecond})
+                console.log("response fetchRecodata: ", response.data)
+                setRecommendList(response.data.videos)
+                console.log("fetchRecommend: ",RecommendList)
+            }
+            catch(error){
+                console.log(error)
+            }
+            
+        }
+        if(data){
+            fetchRecommendData();
+        }
+    },[data])
+    // useEffect(()=>{
+    //     UserInfo()
+    // },[])
     return (
         <div className='main_wrap'>
             <div className="header">
@@ -52,13 +83,13 @@ const Main = () => {
                 </div>
                 <div className="propose">
                     <div className='propose_header'>
-                        <h2>이승민님의 추천콘텐츠</h2>
+                        <h2>{data?.data?.userName}님의 추천콘텐츠</h2>
                         {/* {plusIs ? <MoreRecommend /> :<Link to='/' onClick={handlePlusIs}>더보기</Link> } */}
-                        <Link to='/aboutRecommend'>더보기</Link>
+                        <Link to={{ pathname: '/aboutRecommend', state: { RecommendList } }}>더보기</Link>
                     </div>
                     {/* 수정시작 */}
-                    <MainMoreItems dummydata={dummydata}/>
-
+                    {/* <MainMoreItems dummydata={dummydata}/> */}
+                    <MainMoreItems dummydata={RecommendList.slice(0,5)}/>
                     <div className='propose_header'>
                         <h2>스크랩한 영상</h2>
                         <Link to='/aboutScrab'>더보기</Link>

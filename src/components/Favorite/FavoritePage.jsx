@@ -1,42 +1,30 @@
 import React, { useEffect, useState } from 'react';
-
+import fetchFavoriteList from '../../api/favorite/fetchFavoriteList';
+import axios from 'axios';
 import checkbox from '../../assets/img/Checkbox.png';
+import postFavoriteList from '../../api/favorite/postFavoriteList';
+import { useNavigate } from 'react-router-dom';
 
 function Favorite() {
   //전역상태관리를 통해 이름 동적으로 바꿀예정
   const [favoriteList,setFavoriteList] = useState([]);
-  const [selectedItems,setSelectedItems] = useState([null]);
+  const [selectedItems,setSelectedItems] = useState([]);
+  const navigate = useNavigate()
   useEffect(()=>{
-    async function fetchFavoriteList(){
-      try{
-        const response = await fetch('http://localhost:8080/api/categories/read-all');
-        if(!response.ok){
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setFavoriteList(data);
-        console.log(favoriteList);
+    const fetchData = async () => {
+      try {
+        const response = await fetchFavoriteList();
+        setFavoriteList(response.data);
+      } catch (error) {
+        console.error('Error fetching favorite list:', error);
       }
-      catch(error){
-        console.error('error fetching: ',error);
-      }
-      
-    }
-    fetchFavoriteList();
-  },[favoriteList])
+    };
 
-  const dummydata=[
-    '라이프스타일',
-    '경제/금융',
-    '어학/외국어',
-    '요리/베이킹',
-    '운동/헬스',
-    '사진/영상',
-    '프로그래밍',
-    '마케팅',
-    '디자인',
-    '영상/마인드셋'
-  ]
+    fetchData();
+  },[])
+
+  //console.log("categoryList 조회:",favoriteList )
+  
 
   function handleFavoriteClick(item){
     setSelectedItems((prevItems)=>{
@@ -48,18 +36,32 @@ function Favorite() {
       }
     })
   }
-  function handleFavoriteSubmit(event){
+  async function handleFavoriteSubmit(event){
     event.preventDefault();
     //api 호출
+     try{
+       const response = await postFavoriteList({userId:'lhj6364',selectedItems})
+       console.log(selectedItems)
+       const categoryIds = selectedItems.filter((item) => item !== null).map((item) => item.categoryId);
+       console.log('categooryids: ',categoryIds)
+     }
+     catch(error){
+       console.log(error)
+     }
+  
+     navigate('/')
+    
   }
+  
+ 
   return (
     <form onSubmit={handleFavoriteSubmit}>
       <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
       <ul className='favorite-wrap'>
-        {dummydata.map((dummy)=> 
-        <li key={dummy} className={`favorite-li ${selectedItems.includes(dummy) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(dummy)}>
-          {dummy}
-          {selectedItems.includes(dummy)&&<img src={checkbox} alt='checkbox' className='checkbox'/> }
+        {favoriteList.map((category)=> 
+        <li key={category.categoryId} className={`favorite-li ${selectedItems.includes(category) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(category)}>
+          {category.categoryName}
+          {selectedItems.includes(category.categoryName)&&<img src={checkbox} alt='checkbox' className='checkbox'/> }
           
           </li>)}
         

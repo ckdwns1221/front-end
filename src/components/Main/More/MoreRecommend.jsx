@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-
+import { useLocation } from 'react-router-dom';
 
 import goback from '../../../assets/img/goBack.png';
 import bookmark_activity from '../../../assets/img/bookmark_activity.png';
@@ -32,7 +32,9 @@ const dummydata = [{
 function MoreRecommend() {
     const [bookMarkStates, setBookMarkStates] = useState(dummydata.map(()=>false));
     const [bookScrabIs, setBookScrabIs] = useState(false);
-    
+    const location =useLocation()
+    const { RecommendList } = location.state || {};
+    console.log("recommendList morepage : ",RecommendList)
     function handleBookmark(index) {
         setBookMarkStates((prevStates)=> {
             const newStates = [...prevStates]
