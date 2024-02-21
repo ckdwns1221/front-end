@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 
 const VideoDetail = () => {
     return (
-        <body className='app'>
+        <body className=' app'>
             <div className='VideoDetail_wrap'>
                 <ReactPlayer
                     height='360px'
@@ -13,7 +13,7 @@ const VideoDetail = () => {
                     controls={true}
                     light={false}
                     pip={true}
-                    rotate='90'
+                    rotate='90' 
                 />
             </div>
         </body>

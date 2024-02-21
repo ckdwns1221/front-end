@@ -20,5 +20,3 @@ const Startpage = () => {
     </div>
     )
 }
-
-export default Startpage

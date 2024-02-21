@@ -9,10 +9,6 @@ const TimesetTop = ({ setShow, setWitch, witch, show, choosestart, choosearrive 
     const [PlaceIcon, setPlaceIcon] = useState(0)
 
     useEffect(() => {
-
-        console.log('choosestart', choosestart)
-        console.log('choosearrive', choosearrive)
-
         if (choosestart === '출발지' && choosearrive === '도착지') {
             setPlaceIcon(0)
         } else if (choosestart !== '출발지' && choosearrive === '도착지') {
