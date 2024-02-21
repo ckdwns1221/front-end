@@ -7,7 +7,7 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="Nav">
+    <div className="Nav">
       <Link to='/' className="logo">
         <img src={logoImage} alt="logo" style={{width:"35px", marginTop:"6px"}} />
         </Link>
@@ -32,7 +32,7 @@ const Nav = () => {
           </Link>
         </ul>
       )}
-    </nav>
+    </div>
   );
 };
 

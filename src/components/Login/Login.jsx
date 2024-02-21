@@ -127,7 +127,7 @@ export default function Login() {
             )}
           </div>
         </div>
-        <Link to='/'>
+        <Link to='/logincollect'>
           <button onClick={onClickConfirmButton} disabled={notAllow} className="bottomButton">
             확인
           </button>
