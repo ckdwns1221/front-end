@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useNavigation } from 'react-router-dom'
 import ReactPlayer from 'react-player'
-
-import logoImage from '../../assets/img/logo.png'
-import Human from '../../assets/img/main_human.svg'
+import startHuman from '../../assets/img/start_human.png'
+import rightAB from '../../assets/img/mypage_backward.png'
+import Clock from '../../assets/img/mainClock.svg'
+import Interest from '../../assets/img/interest.svg'
 import MainMoreItems from './MainMoreItems'
+import Nav from '../Nav/Nav'
+import Startpage from '../Startpage/Startpage'
 
 const dummydata = [{
     id: 1,
@@ -38,18 +41,82 @@ const Main = () => {
     function handleFavorite() {
         navigate('/favorite');
     }
+
+    const [firstVisit, setFirstVisit] = useState(false);
+
+    useEffect(() => {
+      if (!localStorage.getItem('visited')) {
+          setFirstVisit(true);
+          localStorage.setItem('visited', 'true');
+
+          const timer = setTimeout(() => {
+              navigate('/');  // 2초 후에 메인 페이지로 이동
+          }, 4000);
+
+          return () => clearTimeout(timer);  // 컴포넌트가 언마운트되면 타이머를 제거합니다.
+      }
+  }, [navigate]);
+
     return (
+      <div className='main-container'>
+        {firstVisit && <Startpage/>}
+        {!firstVisit && <Nav/>}
         <div className='main_wrap'>
             <div className="header">
-                <img src={logoImage} alt="Logo" />
-                <button>Start</button>
-                <Link to='/mypage'><img src={Human} alt="human" />마이페이지</Link>
+                <div className='header-start'>
+                  <div>
+                    <div className='header-subtext'>
+                      출/퇴근 및 통학<br/> 시간 설정하고
+                    </div>
+                    <div className='header-title'>
+                      내가 관심있는<br/>영상보기
+                    </div>
+                    <Link to='/timeset'>
+                      <button className='header-btn'>시작하기</button>
+                    </Link>
+                  </div>
+                  <div>
+                    <img src={startHuman} alt="시작 사진" style={{width:"130px"}} />
+                  </div>
+                </div>
+                <div className='subBtn-boxWrap'>
+                    <div className='subBtn-box'>
+                      <div className="box-header">
+                        <div className="box-title">
+                          시간 설정
+                        </div>
+                        <img src={rightAB} alt="꺽쇠" className='rightAB'  />
+                      </div>
+                      <div className="box-content">
+                        <div className="box-subtitle">
+                          출/퇴근 시간<br/>설정하기
+                        </div>
+                        <div className="box-icon">
+                          <img src={ Clock } alt="시계" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className='subBtn-box' onClick={handleFavorite}>
+                      <div className="box-header">
+                        <div className="box-title">
+                          관심분야 설정
+                        </div>
+                        <img src={rightAB} alt="꺽쇠" className='rightAB' />
+                      </div>
+                      <div className="box-content">
+                        <div className="box-subtitle">
+                          나의 관심분야<br/>
+                          설정하기
+                        </div>
+                        <div className="box-icon">
+                          <img src={ Interest } alt="관심" />
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
             <div className="main">
-                <div className='button'>
-                    <button>시간 설정</button>
-                    <button onClick={handleFavorite}>관심분야 설정</button>
-                </div>
+                <div className="main-line"></div>
                 <div className="propose">
                     <div className='propose_header'>
                         <h2>이승민님의 추천콘텐츠</h2>
@@ -67,6 +134,7 @@ const Main = () => {
                 </div>
             </div>
         </div>
+      </div>
     )
 }
 

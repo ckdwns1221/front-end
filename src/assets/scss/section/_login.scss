@@ -1,15 +1,26 @@
+@keyframes fadeinout {
+  0% {
+    opacity: 0;
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
 .login-container {
-  height: 100vh;
+  min-height: 100vh;
   padding: 60px 30px;
 
   .login-header {
-    height: 30%;
     display: flex;
     text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #93988F;
+    margin-top: 30px;
 
     img {
         width: 40px;
@@ -131,6 +142,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    .fade-out-box {
+      display: inline-block;
+      padding: 10px;
+      animation: fadeinout 4s;
+    }
 
     img {
         width: 40px;
