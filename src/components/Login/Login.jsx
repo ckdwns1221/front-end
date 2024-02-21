@@ -1,34 +1,147 @@
-import React from 'react'
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query';
+import { Link } from 'react-router-dom'
 import logoImage from '../../assets/img/logo.png'
+import eyeOpenImage from '../../assets/img/login_eye_open.svg'
+import eyeClosedImage from '../../assets/img/login_eye_closed.svg'
+import ScrollTop from '../../utils/ScrollTop';
+import Nav from '../Nav/Nav'
+import axios from 'axios'
 
-const Login = () => {
-    let navigate = useNavigate();
+const useLoginMutation = () => {
+  const queryClient = useQueryClient();
 
-    const onSubmit = () => {
-        navigate('/logincollect')
+  return useMutation(
+    (userData) => axios.post('https://3.34.197.56:443/api/users/login', userData),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('userData');
+      },
     }
+  );
+};
 
-    return (
-        <div className='login_wrap'>
-            <div className="header">
-                <img src={logoImage} alt="Logo" />
-                <p>틈새시간, 손틈새로 <br />아낄 준비 되셨나요?</p>
-            </div>
-            <div className="login">
-                <input type="text" placeholder='ID' />
-                <div>
-                    <input type="text" placeholder='Password' />
-                    <button></button>
-                </div>
-            </div>
-            <button onClick={() => {onSubmit()}}>로그인</button>
-            <ul>
-                <li>아이디 찾기</li>/
-                <li>비밀번호 찾기</li>
-            </ul>
+export default function Login() {
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+
+  const [idValid, setIdValid] = useState(false);
+  const [pwValid, setPwValid] = useState(false);
+  const [notAllow, setNotAllow] = useState(true);
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  useEffect(() => {
+    if(idValid && pwValid) {
+      setNotAllow(false);
+      return;
+    }
+    setNotAllow(true);
+  }, [idValid, pwValid]);
+
+  const handleId = (e) => {
+    setId(e.target.value);
+    const regex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/;
+    if (regex.test(e.target.value)) {
+      setIdValid(true);
+    } else {
+      setIdValid(false);
+    }
+  };
+  const handlePw = (e) => {
+    setPw(e.target.value);
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+    if (regex.test(e.target.value)) {
+      setPwValid(true);
+    } else {
+      setPwValid(false);
+    }
+  };
+
+  const loginMutation = useLoginMutation();
+
+  const onClickConfirmButton = async () => {
+    const userData = {
+      userId: id,
+      userPw: pw,
+    };
+
+    try {
+      await loginMutation.mutateAsync(userData);
+      alert('로그인에 성공했습니다.');
+    } catch (error) {
+      alert('로그인에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+
+  return (
+    <>
+      <Nav />
+      <div className="login-container">
+        <div className="login-header">
+          <img src={logoImage} alt="logo" />
+          <div className="login-text">
+            틈새시간, 손틈새로<br />
+            아낄준비 되셨나요?
+          </div>
         </div>
-    )
+        <div className="login-input">
+          <div className="input-header">
+            로그인
+          </div>
+          <div className="input-title">
+            아이디
+          </div>
+          <div className="input-wrap">
+            <input
+              className="input"
+              type="text"
+              placeholder="ID"
+              value={id}
+              onChange={handleId}/>
+          </div>
+          <div className="errorMessageWrap">
+            {!idValid && id.length > 0 && (
+              <div>올바른 아이디를 입력해주세요.</div>
+            )}
+          </div>
+          <div className="input-title">
+            비밀번호
+          </div>
+          <div className="input-wrap pweyes">
+            <input
+              className="input"
+              type={passwordVisible ? "text" : "password"}
+              placeholder="Password"
+              value={pw}
+              onChange={handlePw} />
+            <button 
+              style={{ backgroundImage: `url(${passwordVisible ? eyeOpenImage : eyeClosedImage})` }} 
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            />
+          </div>
+          <div className="errorMessageWrap">
+            {!pwValid && pw.length > 0 && (
+              <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
+            )}
+          </div>
+        </div>
+        <Link to='/'>
+          <button onClick={onClickConfirmButton} disabled={notAllow} className="bottomButton">
+            확인
+          </button>
+        </Link>
+        <div className="goJoinWrap">
+          회원이 아니신가요? 
+          <Link to='/join'>
+            <div className="goToJoin">
+              회원가입 하러가기
+            </div>
+          </Link>
+        </div>
+      </div>
+      <ScrollTop />
+    </>
+  );
 }
-
-export default Login

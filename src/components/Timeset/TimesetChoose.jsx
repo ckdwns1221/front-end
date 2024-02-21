@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, setChoosestart, setChoosearrive }) => {
     const [done, setDone] = useState(false)
     const [isDisabled, setIsDisabled] = useState(false)
+    const [second, setSecond] = useState(0);
+    const [minutes, setMinutes] = useState(0);
 
     const onSubmit = () => {
         if (choosestart === '출발지' || choosearrive === '도착지') {
@@ -12,7 +15,41 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
 
         setDone(true)
         setIsDisabled(true)
-    }
+
+        const queryParams = {
+            params: {
+                distance: choosestart,
+                arrive: choosearrive
+            }
+        };
+
+        axios.get('https://3.34.197.56/api/distance/get', queryParams)
+            .then(response => {
+                console.log('API 요청이 성공했습니다.', response.data);
+                setSecond(response.data.data)
+            })
+            .catch(error => {
+                console.error('API 요청이 실패했습니다.', error);
+            });
+
+    };
+
+    useEffect(() => {
+        setMinutes(Math.floor(second / 60));
+
+        const RequestBody = {
+            time: minutes
+          };
+      
+
+        axios.put('https://3.34.197.56/api/users/ooooo0516/change-time', RequestBody)
+            .then(response => {
+                console.log(response.data.message);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, [second])
 
     return (
         <>
@@ -22,14 +59,9 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
             </div>
 
             {done ? (
-                <p className='time'><strong>40분</strong>소요</p>
+                <p className='time'><strong>{minutes}분</strong>소요</p>
             ) : (
                 <div className="change">
-                    {choosestart !== '출발지' && choosearrive !== '도착지' ? (
-                        <p><strong>40분</strong>소요</p>
-                    ) : (
-                        <></>
-                    )}
                     <button onClick={() => { setShow(true); setChoosestart('출발지'); setChoosearrive('도착지') }}>직접 입력하기</button >
                     <button onClick={() => { onSubmit() }}>완료</button>
                 </div >
