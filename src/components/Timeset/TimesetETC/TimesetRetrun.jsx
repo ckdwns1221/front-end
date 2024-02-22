@@ -1,5 +1,4 @@
 import React from 'react'
-import Map from '../../../assets/img/timeset_map.svg'
 import Return from '../../../assets/img/timeset_retrun.svg'
 
 const TimesetRetrun = ({ setAll, props }) => {
@@ -8,9 +7,16 @@ const TimesetRetrun = ({ setAll, props }) => {
             <button onClick={() => { setAll(true) }} className='retrun_btn'>
                 <img src={Return} alt="return" className='return' />
             </button>
-            <img src={Map} alt="map" className='mapSvg' />
             <p className='start'>
-                <strong>{props}</strong> 설정
+                {props === '출발지' ? (
+                    <>
+                        <strong>{props}</strong> 설정
+                    </>
+                ) : (
+                    <>
+                        <strong style={{color: '#FF6D6D'}}>{props}</strong> 설정
+                    </>
+                )}
             </p>
         </>
     )
