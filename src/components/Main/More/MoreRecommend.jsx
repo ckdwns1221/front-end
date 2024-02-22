@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import Nav from '../../Nav/Nav'
 import { useLocation } from 'react-router-dom';
 
 import goback from '../../../assets/img/goBack.png';
@@ -43,15 +44,17 @@ function MoreRecommend() {
         });
     }
     return (
+      <>
+        <Nav/>
         <div className='more_wrap'>
             <div style={{ marginBottom: 30 }}>
                 <div className='more_header'>
-                    <Link to='/'><img src={goback} className='goBack_img' /></Link>
-                    <h2 style={{ fontWeight: 900 }}>이승민님의 추천콘텐츠</h2>
+                    <h2 style={{ fontWeight: 900, color:"white" }}>이승민님의 추천콘텐츠</h2>
                 </div>
 
             </div>
             <div className="more">
+                <div className="more-line"></div>
                 <ul className='more-content-wrap'>
                     {dummydata.map((dummy,index) => (
                         <>
@@ -80,6 +83,7 @@ function MoreRecommend() {
                 </ul>
             </div>
         </div>
+      </>
     )
 }
 

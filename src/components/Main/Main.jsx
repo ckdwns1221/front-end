@@ -2,21 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useQuery,useQueryClient } from 'react-query'
 import axios from 'axios'
 
-import logoImage from '../../assets/img/logo.png'
-import Human from '../../assets/img/main_human.svg'
 import MainMoreItems from './MainMoreItems'
 import UserInfo from '../../store/UserInfo'
 import { fetchUserInfo } from '../../api/fetchUserInfo'
 import fetchRecommend from '../../api/mainpage/fetchRecommend'
 
-import { Link, useNavigate, useNavigation } from 'react-router-dom'
-import ReactPlayer from 'react-player'
+import { Link, useNavigate } from 'react-router-dom'
 import startHuman from '../../assets/img/start_human.png'
 import rightAB from '../../assets/img/mypage_backward.png'
 import Clock from '../../assets/img/mainClock.svg'
 import Interest from '../../assets/img/interest.svg'
 import Nav from '../Nav/Nav'
-import Startpage from '../Startpage/Startpage'
 
 const dummydata = [{
     id: 1,
@@ -41,13 +37,12 @@ const dummydata = [{
 ]
 
 const Main = () => {
-    const [plusIs, setPlusIs] = useState(false);
     const {data,isLoading,error} = useQuery('userInfomation',()=> fetchUserInfo('lhj6364'))
     const [RecommendList,setRecommendList] = useState([])
     
     const navigate = useNavigate()
-    function handlePlusIs() {
-        setPlusIs(!plusIs)
+    function handleTimeset() {
+        navigate('/timeset')
     }
     function handleFavorite() {
         navigate('/favorite');
@@ -78,25 +73,9 @@ const Main = () => {
     //     UserInfo()
     // },[])
 
-    const [firstVisit, setFirstVisit] = useState(false);
-
-    useEffect(() => {
-      if (!localStorage.getItem('visited')) {
-          setFirstVisit(true);
-          localStorage.setItem('visited', 'true');
-
-          const timer = setTimeout(() => {
-              navigate('/');  // 2초 후에 메인 페이지로 이동
-          }, 4000);
-
-          return () => clearTimeout(timer);  // 컴포넌트가 언마운트되면 타이머를 제거합니다.
-      }
-  }, [navigate]);
-
     return (
       <div className='main-container'>
-        {firstVisit && <Startpage/>}
-        {!firstVisit && <Nav/>}
+        <Nav/>
         <div className='main_wrap'>
             <div className="header">
                 <div className='header-start'>
@@ -116,7 +95,7 @@ const Main = () => {
                   </div>
                 </div>
                 <div className='subBtn-boxWrap'>
-                    <div className='subBtn-box'>
+                    <div className='subBtn-box' onClick={handleTimeset}>
                       <div className="box-header">
                         <div className="box-title">
                           시간 설정
@@ -128,7 +107,7 @@ const Main = () => {
                           출/퇴근 시간<br/>설정하기
                         </div>
                         <div className="box-icon">
-                          <img src={ Clock } alt="시계" />
+                          <img src={ Clock } alt="시계" style={{width:"32px"}}/>
                         </div>
                       </div>
                     </div>
@@ -145,7 +124,7 @@ const Main = () => {
                           설정하기
                         </div>
                         <div className="box-icon">
-                          <img src={ Interest } alt="관심" />
+                          <img src={ Interest } alt="관심" style={{width:"34px"}} />
                         </div>
                       </div>
                     </div>

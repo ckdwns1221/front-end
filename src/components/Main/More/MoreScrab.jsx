@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import Nav from '../../Nav/Nav'
+
 
 import goback from '../../../assets/img/goBack.png';
 import bookmark_activity from '../../../assets/img/bookmark_activity.png';
@@ -35,41 +37,43 @@ function MoreRecommend() {
         setBookMarkIs(!bookMarkIs);
     }
     return (
+      <>
+        <Nav />
         <div className='more_wrap'>
-        <div style={{ marginBottom: 30 }}>
-            <div className='more_header'>
-                <Link to='/'><img src={goback} className='goBack_img' /></Link>
-                <h2 style={{ fontWeight: 900 }}>이승민님의 추천콘텐츠</h2>
-            </div>
+          <div style={{ marginBottom: 30 }}>
+              <div className='more_header'>
+                  <h2 style={{ fontWeight: 900, color:"white" }}>이승민님의 스크랩 영상</h2>
+              </div>
+          </div>
+          <div className="more">
+              <div className="more-line"></div>
+              <ul className='more-content-wrap'>
+                  {dummydata.map((dummy) => (
+                      <>
+                          <li key={dummy.id} className='more-content-video'>
+                              <div className='video-container'>
+                                  <ReactPlayer
+                                      url={dummy.videoUrl}
+                                      className='react-player'
+                                      width='100%'
+                                      height='100%'
+                                      controls={true}
+                                  />
+                              </div>
+                              <div className='more-content-footer'>
+                                  <div className='more-letter-wrap'>
+                                      <p className='more-footer-category'>{dummy.category}</p>
+                                      <p className='more-footer-title'>{dummy.title}</p>
+                                  </div>
 
-        </div>
-        <div className="more">
-            <ul className='more-content-wrap'>
-                {dummydata.map((dummy) => (
-                    <>
-                        <li key={dummy.id} className='more-content-video'>
-                            <div className='video-container'>
-                                <ReactPlayer
-                                    url={dummy.videoUrl}
-                                    className='react-player'
-                                    width='100%'
-                                    height='100%'
-                                    controls={true}
-                                />
-                            </div>
-                            <div className='more-content-footer'>
-                                <div className='more-letter-wrap'>
-                                    <p className='more-footer-category'>{dummy.category}</p>
-                                    <p className='more-footer-title'>{dummy.title}</p>
-                                </div>
-
-                            </div>
-                        </li >
-                    </>
-                ))}
-            </ul>
-        </div>
-    </div>
+                              </div>
+                          </li >
+                      </>
+                  ))}
+              </ul>
+          </div>
+      </div>
+    </>
 )
 }
 
