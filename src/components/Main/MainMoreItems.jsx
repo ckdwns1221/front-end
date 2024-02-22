@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
+import { getCategoryName } from './util/getCategoryName'
+import { categoryData } from './categoryData'
 
 function MainMoreItems({dummydata}) {
   return (
@@ -19,7 +21,7 @@ function MainMoreItems({dummydata}) {
             </div>
             <div className='main-content-footer'>
               <div className='main-letter-wrap'>
-                <p className='main-footer-category'>{dummy.categoryId}</p>
+                <p className='main-footer-category'>{getCategoryName(dummy.categoryId)}</p>
                 <p className='main-footer-title'>{dummy.videoTitle}</p>
               </div>
               
