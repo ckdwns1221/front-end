@@ -14,22 +14,18 @@
   padding: 60px 30px;
 
   .login-header {
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #93988F;
-    margin-top: 30px;
+    margin-top: 60px;
 
-    img {
-        width: 40px;
+    .login-title {
+      font-weight: 900;
+      font-size: 30px;
     }
 
     .login-text {
+      color: #93988F;
       font-weight: 700;
       line-height: 1.2;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
       margin-top: 10px;
     }
@@ -39,11 +35,6 @@
     padding-top: 10px;
     display: flex;
     flex-direction: column;
-
-    .input-header {
-      font-size: 24px;
-      font-weight: 900;
-    }
     
     .input-title{
       font-size: 12px;
@@ -142,6 +133,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 
     .fade-out-box {
       display: inline-block;

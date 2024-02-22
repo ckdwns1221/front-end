@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import fetchFavoriteList from '../../api/favorite/fetchFavoriteList';
 import axios from 'axios';
+import Nav from '../Nav/Nav'
 import checkbox from '../../assets/img/Checkbox.png';
 import postFavoriteList from '../../api/favorite/postFavoriteList';
 import { useNavigate } from 'react-router-dom';
@@ -55,19 +56,22 @@ function Favorite() {
   
  
   return (
-    <form onSubmit={handleFavoriteSubmit}>
-      <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
-      <ul className='favorite-wrap'>
-        {favoriteList.map((category)=> 
-        <li key={category.categoryId} className={`favorite-li ${selectedItems.includes(category) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(category)}>
-          {category.categoryName}
-          {selectedItems.includes(category.categoryName)&&<img src={checkbox} alt='checkbox' className='checkbox'/> }
+    <>
+      <Nav />
+      <form onSubmit={handleFavoriteSubmit}>
+        <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
+        <ul className='favorite-wrap'>
+          {favoriteList.map((category)=> 
+          <li key={category.categoryId} className={`favorite-li ${selectedItems.includes(category) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(category)}>
+            {category.categoryName}
+            {selectedItems.includes(category.categoryName)&&<img src={checkbox} alt='checkbox' className='checkbox'/> }
+            
+            </li>)}
           
-          </li>)}
-        
-      </ul>
-      <button type="submit" className='checkbutton'>확인</button>
-    </form>
+        </ul>
+        <button type="submit" className='checkbutton'>확인</button>
+      </form>
+    </>
   )
 }
 

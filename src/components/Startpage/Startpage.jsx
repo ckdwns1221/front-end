@@ -5,7 +5,7 @@ import startHuman from '../../assets/img/start_human.png'
 const Startpage = () => {
     return (
       <div className='start-container fade-out-box'>
-      <div className='start_wrap '>
+        <div className='start_wrap '>
           <div className="header">
               <div className="logo">
                   <img src={logoImage} alt="Logo" />
