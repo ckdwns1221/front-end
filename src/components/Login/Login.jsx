@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query';
+import {atom, useRecoilState} from 'recoil'
 import { Link } from 'react-router-dom'
 import logoImage from '../../assets/img/logo.png'
 import eyeOpenImage from '../../assets/img/login_eye_open.svg'
@@ -8,13 +9,25 @@ import ScrollTop from '../../utils/ScrollTop';
 import Nav from '../Nav/Nav'
 import axios from 'axios'
 
+export const idState = atom({
+  key: 'idState', 
+  default: localStorage.getItem('id') || '', 
+});
+export const nameState = atom({
+  key: 'nameState',
+  default: localStorage.getItem('name') || '',
+});
+
 const useLoginMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
     async (userData) =>axios.post('https://3.34.197.56:443/api/users/login', userData),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        console.log('Login Response Data:', data.data.data.userId)
+        localStorage.setItem('id', data.data.data.userId || '');
+        localStorage.setItem('name', data.data.data.userName || '');
         queryClient.invalidateQueries('userData');
       },
     }
@@ -22,7 +35,8 @@ const useLoginMutation = () => {
 };
 
 export default function Login() {
-  const [id, setId] = useState('');
+  // const [id, setId] = useState('');
+  const[id,setId] = useRecoilState(idState)
   const [pw, setPw] = useState('');
 
   const [idValid, setIdValid] = useState(false);
@@ -67,7 +81,10 @@ export default function Login() {
     };
 
     try {
-      await loginMutation.mutateAsync(userData);
+      const response = await loginMutation.mutateAsync(userData);
+      console.log('Login Response:', response.data.data);
+      localStorage.setItem('id', response.data.data.userId || '');
+      localStorage.setItem('name', response.data.data.userName || '');
       alert('로그인에 성공했습니다.');
     } catch (error) {
       alert('로그인에 실패했습니다. 다시 시도해주세요.');

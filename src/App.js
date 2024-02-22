@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
 
 import Main from './components/Main/Main'
 import Login from './components/Login/Login'
@@ -23,37 +24,39 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Main/>} />
-        <Route path='/aboutRecommend' element={<MoreRecommend />} />
-        <Route path='/aboutScrab' element={<MoreScrab />} />
-        <Route path='/favorite' element={<Favorite />} />
-        <Route path='/' element={<Main />} />
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/aboutRecommend' element={<MoreRecommend />} />
+            <Route path='/aboutScrab' element={<MoreScrab />} />
+            <Route path='/favorite' element={<Favorite />} />
 
-        <Route path='/login' element={< Login />} />
-        <Route path='/logincollect' element={< LoginCollect />} />
+            <Route path='/login' element={< Login />} />
+            <Route path='/logincollect' element={< LoginCollect />} />
 
-        <Route path='/join' element={< Join />} />
-        <Route path='/joincollect' element={< JoinCollect />} />
+            <Route path='/join' element={< Join />} />
+            <Route path='/joincollect' element={< JoinCollect />} />
 
-        <Route path='/mypage' element={< Mypage />} />
-        <Route path='/mypage/:userid/:date' element={<History/> }/>
+            <Route path='/mypage' element={< Mypage />} />
+            <Route path='/mypage/:userid/:date' element={<History />} />
 
-        <Route path='/startpage' element={< Startpage />} />
+            <Route path='/startpage' element={< Startpage />} />
 
-        <Route path='/timeset' element={< Timeset />} />
-        <Route path='/timesetplace' element={< TimesetStart />} />
+            <Route path='/timeset' element={< Timeset />} />
+            <Route path='/timesetplace' element={< TimesetStart />} />
 
-        <Route path='/videopage' element={< Videopage />} />
-        <Route path='/videopage/:videoId' element={< VideoDetail />} />
+            <Route path='/videopage' element={< Videopage />} />
+            <Route path='/videopage/:videoId' element={< VideoDetail />} />
 
-        <Route path='/test' element={<Testfetch/> } />
-      </Routes>
-    </BrowserRouter>
-    </QueryClientProvider>
-    
+            <Route path='/test' element={<Testfetch />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </RecoilRoot>
+
+
   )
 }
 

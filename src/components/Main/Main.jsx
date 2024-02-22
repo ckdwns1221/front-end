@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery,useQueryClient } from 'react-query'
 import axios from 'axios'
+import { useRecoilValue } from 'recoil'
 
 import MainMoreItems from './MainMoreItems'
 import UserInfo from '../../store/UserInfo'
@@ -13,6 +14,11 @@ import rightAB from '../../assets/img/mypage_backward.png'
 import Clock from '../../assets/img/mainClock.svg'
 import Interest from '../../assets/img/interest.svg'
 import Nav from '../Nav/Nav'
+import Startpage from '../Startpage/Startpage'
+import {idState} from '../Login/Login'
+import fetchMore from '../../api/mainpage/fetchScrap'
+import MoreItems from './More/MoreItems'
+import fetchScrap from '../../api/mainpage/fetchScrap'
 
 const dummydata = [{
     id: 1,
@@ -37,9 +43,10 @@ const dummydata = [{
 ]
 
 const Main = () => {
-    const {data,isLoading,error} = useQuery('userInfomation',()=> fetchUserInfo('lhj6364'))
+    const userId = useRecoilValue(idState)
+    const {data,isLoading,error} = useQuery('userInfomation',()=> fetchUserInfo(userId))
     const [RecommendList,setRecommendList] = useState([])
-    
+    const [moreList,setMoreList] = useState([])
     const navigate = useNavigate()
     function handleTimeset() {
         navigate('/timeset')
@@ -55,7 +62,7 @@ const Main = () => {
             console.log("userid:", userId)
             const timeSecond = time*60
             try{
-                const response = await fetchRecommend({userId,timeSecond})
+                const response = await fetchRecommend({userId})
                 console.log("response fetchRecodata: ", response.data)
                 setRecommendList(response.data.videos)
                 console.log("fetchRecommend: ",RecommendList)
@@ -65,8 +72,24 @@ const Main = () => {
             }
             
         }
+        const fetchMoreData = async() =>{
+          const {userId,time} = data.data
+          
+          try{
+              const response = await fetchScrap({userId,type:'home'})
+              console.log("response fetchRScrapdata: ", response.data)
+              setMoreList(response.data.scraps)
+              console.log("fetchRecommend: ",RecommendList)
+          }
+          catch(error){
+              console.log(error)
+          }
+          
+      }
+
         if(data){
             fetchRecommendData();
+            fetchMoreData();
         }
     },[data])
     // useEffect(()=>{
@@ -138,14 +161,13 @@ const Main = () => {
                         {/* {plusIs ? <MoreRecommend /> :<Link to='/' onClick={handlePlusIs}>더보기</Link> } */}
                         <Link to={{ pathname: '/aboutRecommend', state: { RecommendList } }}>더보기</Link>
                     </div>
-                    {/* 수정시작 */}
-                    {/* <MainMoreItems dummydata={dummydata}/> */}
+  
                     <MainMoreItems dummydata={RecommendList.slice(0,5)}/>
                     <div className='propose_header'>
                         <h2>스크랩한 영상</h2>
                         <Link to='/aboutScrab'>더보기</Link>
                     </div>
-                    <MainMoreItems dummydata={dummydata}/>
+                    <MainMoreItems dummydata={moreList.slice(0,5)}/>
                 </div>
             </div>
         </div>

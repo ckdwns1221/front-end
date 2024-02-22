@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import fetchFavoriteList from '../../api/favorite/fetchFavoriteList';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+
+import fetchFavoriteList from '../../api/favorite/fetchFavoriteList';
 import Nav from '../Nav/Nav'
 import checkbox from '../../assets/img/Checkbox.png';
 import postFavoriteList from '../../api/favorite/postFavoriteList';
-import { useNavigate } from 'react-router-dom';
-
+import {idState,nameState} from '../Login/Login'
 function Favorite() {
   //전역상태관리를 통해 이름 동적으로 바꿀예정
   const [favoriteList,setFavoriteList] = useState([]);
   const [selectedItems,setSelectedItems] = useState([]);
+  const userId = useRecoilValue(idState)
+  const userName = useRecoilValue(nameState)
+  console.log("Favorite userId:", userId)
   const navigate = useNavigate()
   useEffect(()=>{
     const fetchData = async () => {
@@ -41,7 +46,7 @@ function Favorite() {
     event.preventDefault();
     //api 호출
      try{
-       const response = await postFavoriteList({userId:'lhj6364',selectedItems})
+       const response = await postFavoriteList({userId:userId,selectedItems})
        console.log(selectedItems)
        const categoryIds = selectedItems.filter((item) => item !== null).map((item) => item.categoryId);
        console.log('categooryids: ',categoryIds)
@@ -58,7 +63,7 @@ function Favorite() {
   return (
     <>
       <Nav />
-      <form onSubmit={handleFavoriteSubmit}>
+      <form className='favorite-form' onSubmit={handleFavoriteSubmit}>
         <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
         <ul className='favorite-wrap'>
           {favoriteList.map((category)=> 
