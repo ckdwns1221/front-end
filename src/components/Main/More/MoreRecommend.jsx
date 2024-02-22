@@ -21,8 +21,7 @@ function MoreRecommend() {
     const [bookMarkList, setBookMarkList] = useState([]);
     const userName = useRecoilValue(nameState);
     const userId = useRecoilValue(idState);
-    const location = useLocation();
-    const { RecommendList } = location.state || {};
+   
 
     useEffect(() => {
         const fetchData = async () => {

@@ -80,7 +80,7 @@ const Main = () => {
           
           try{
               const response = await fetchScrap({userId,type:'home'})
-              console.log("response fetchRecodata: ", response.data)
+              console.log("response fetchRScrapdata: ", response.data)
               setMoreList(response.data.scraps)
               console.log("fetchRecommend: ",RecommendList)
           }

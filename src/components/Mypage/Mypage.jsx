@@ -12,7 +12,6 @@ import {idState,nameState} from '../Login/Login'
 
 const Mypage = () => {
   const initialDate = new Date()
-  const userid = 'k' // 추후 리덕스로 불러올 예정
   const userId = useRecoilValue(idState)
   const userName = useRecoilValue(nameState)
   const [selectedDate, setSelectedDate] = useState(initialDate)
@@ -41,7 +40,7 @@ const Mypage = () => {
   useEffect(() => {
     if (initialDate !== selectedDate) {
       const formattedDate = selectedDate.getUTCFullYear() + '-' + ('0' + (selectedDate.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + selectedDate.getUTCDate()).slice(-2);
-      navigate(`/mypage/${userid}/${formattedDate}`)
+      navigate(`/mypage/${userId}/${formattedDate}`)
     }
   }, [selectedDate]);
 
