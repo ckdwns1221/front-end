@@ -1,5 +1,5 @@
 .video_wrap {
-    padding: 50px 30px;
+    padding: 90px 30px 50px;
     height: 100vh;
 
     .retrun_btn {
@@ -27,7 +27,7 @@
     .video {
         border-radius: 30px;
         margin-top: 20px;
-        height: 500px;
+        height: 80%;
         background-color: #FFEAEA;
         overflow: auto;
         padding: 35px 25px;
@@ -75,10 +75,9 @@
                     left: 0;
                     position: absolute;
                     width: 100%;
-                    height: 53px;
                     background-color: var(--maincolor01);
                     border-radius: 0 0 12px 12px;
-                    padding: 12px 18px;
+                    padding: 10px 18px 4px;
                     color: var(--white);
 
                     p {
