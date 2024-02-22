@@ -1,5 +1,5 @@
 .mypage-wrap {
-    margin-top: 50px;
+    margin-top: 120px;
     margin-left: 2rem;
     margin-right: 2rem;
 
@@ -10,8 +10,6 @@
     }
 
     .mypage-header {
-        margin-left: 3rem;
-        margin-right: 1rem;
         margin-top: 50px;
 
     }
@@ -43,13 +41,14 @@
 
         button {
             background-color: var(--maincolor01);
-            height: 84px;
+            height: 40px;
             width: 163px;
             border-radius: 15px;
-            margin: 40px 5px;
+            margin: 40px 10px;
             font-size: 14px;
             font-weight: 700;
             color: var(--white);
+            padding-top: 3px;
         }
     }
 
@@ -74,10 +73,11 @@
 
     .mypage-content-wrap {
         margin-top: 40px;
+        text-align: center;
 
         .react-calendar {
-            max-width: 400px;
-            margin: 0 auto;
+          width: 90%;
+          margin: 0 auto;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

@@ -93,7 +93,7 @@ const TimesetStart = ({ choosestart, setChoosestart, setAll }) => {
                 ))}
             </Map>
 
-            <TimesetSwiper setShow={setShow} show={show} setChoose={setChoose} setAll={setAll} markers={markers} setSearch={setSearch}/>
+            <TimesetSwiper setShow={setShow} show={show} setChoose={setChoose} setAll={setAll} markers={markers} setSearch={setSearch} search={search}/>
         </div>
     )
 }

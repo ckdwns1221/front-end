@@ -5,7 +5,7 @@ import { Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import { height } from '../js/anime';
 
-const TimesetSwiper = ({ setShow, show, setChoose, setAll, markers, setSearch }) => {
+const TimesetSwiper = ({ search, setShow, show, setChoose, setAll, markers, setSearch }) => {
     const Array = [...markers]
     const [selectedSlide, setSelectedSlide] = useState(null);
 
@@ -16,12 +16,18 @@ const TimesetSwiper = ({ setShow, show, setChoose, setAll, markers, setSearch })
         setShow(false)
     };
 
+    const Submit = () => {
+        if (search===''){
+            alert('위치를 설정해주세요!')
+            return
+        }
+        setAll(true)
+    }
+
     return (
         <>
             {show ? (
-                <motion.div
-                    variants={height} initial="initial" animate="enter" exit="exit"
-                >
+                <div>
                     <Swiper
                         pagination={{
                             dynamicBullets: true,
@@ -40,10 +46,10 @@ const TimesetSwiper = ({ setShow, show, setChoose, setAll, markers, setSearch })
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                </motion.div>
+                </div>
             ) : (
                 <div className='start_btn'>
-                    <button onClick={() => { setAll(true) }}>확인</button>
+                    <button onClick={() => { Submit(); }}>확인</button>
                 </div>
             )}
         </>

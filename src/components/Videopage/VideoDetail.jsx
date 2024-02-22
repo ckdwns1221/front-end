@@ -13,7 +13,7 @@ const VideoDetail = () => {
                     controls={true}
                     light={false}
                     pip={true}
-                    rotate='90' 
+                    rotate='90'  
                 />
             </div>
         </body>

@@ -97,16 +97,15 @@ export default function Login() {
       <Nav />
       <div className="login-container">
         <div className="login-header">
-          <img src={logoImage} alt="logo" />
+          <div className="login-title">
+            로그인
+          </div>
           <div className="login-text">
             틈새시간, 손틈새로<br />
             아낄준비 되셨나요?
           </div>
         </div>
         <div className="login-input">
-          <div className="input-header">
-            로그인
-          </div>
           <div className="input-title">
             아이디
           </div>
