@@ -15,6 +15,7 @@ const Mypage = () => {
   const userId = useRecoilValue(idState)
   const userName = useRecoilValue(nameState)
   const [selectedDate, setSelectedDate] = useState(initialDate)
+  const [myData, setMyData] = useState([])
   const navigate = useNavigate()
 
   function handleDateChange(date) {
@@ -22,20 +23,28 @@ const Mypage = () => {
     setSelectedDate(utcDate)
     console.log(selectedDate)
   }
+  const formatTime = (time) => {
+    if (time){
+      const [hours, minutes, seconds] = time.split(':');
+      return `${parseInt(hours, 10)}시간${parseInt(minutes, 10)}분`
+    }
+    
+  };
   
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchCalendar(userId);
-        console.log('Fetched data:', data);
-        
+        const response = await fetchCalendar(userId);
+        setMyData(response.data)
+        console.log('Fetched data:', response);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+    
     fetchData();
   }, []);
+  console.log('mydata: ',myData)
  
   useEffect(() => {
     if (initialDate !== selectedDate) {
@@ -51,7 +60,7 @@ const Mypage = () => {
         <img src={mypage_option} alt='mypage_option' style={{ width: 20 }} />
       </div>
       <div className='mypage-header-wrap'>
-        <MypageHeader name={userName} time={'9시간 40분'} />
+        <MypageHeader name={userName} time={formatTime(myData.totalTime)} />
       </div>
       <div className='mypage-content-wrap'>
         <Calendar onChange={handleDateChange} value={selectedDate} locale='en-US' />

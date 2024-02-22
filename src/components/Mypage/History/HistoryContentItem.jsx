@@ -55,7 +55,7 @@ function HistoryContentItem({onClick,bookMarkIs}) {
                 <p className='history-footer-category'>{dummy.category}</p>
                 <p className='history-footer-title'>{dummy.title}</p>
               </div>
-              {bookMarkIs? <img className='history-bookmark' src={bookmark_activity} alt='bookmark_notactivity' onClick={onClick}/> : <img className='history-bookmark' src={bookmark_notactivity} alt='bookmark_activity' onClick={onClick}/>}
+              {bookMarkIs? <img className='history-bookmark' src={bookmark_activity} alt='bookmark_notactivity' onClick={()=>onClick()}/> : <img className='history-bookmark' src={bookmark_notactivity} alt='bookmark_activity' onClick={()=>onClick()}/>}
             </div>
           </li >
         </>

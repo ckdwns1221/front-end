@@ -20,6 +20,10 @@ function History() {
     function handleBookmark(){
         setBookmarkIs(!bookmarkIs)
     }
+    function formatDate(date){
+        const [year,month,day] = date.split('-');
+        return `${parseInt(year,10)}년 ${parseInt(month,10)}월 ${parseInt(day,10)}일`
+    }
     useEffect(()=>{
         const fetchData = async()=>{
             try{
@@ -37,7 +41,7 @@ function History() {
 
     return (
         <div className='history-wrap'>
-            <HistoryHeader userid={userName} date={date} />
+            <HistoryHeader userid={userName} date={formatDate(date)} />
             <HistoryContentItem onClick={handleBookmark} bookmarkIs={bookmarkIs}/>
             <button className='history-check-button' onClick={handleCheck}>확인</button>
         </div>
