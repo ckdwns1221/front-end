@@ -108,15 +108,15 @@ export default function Join() {
       <Nav />
       <div className="join-container">
         <div className="join-header">
-          <img src={logoImage} alt="logo" />
+          <div className="join-title">
+            회원가입
+          </div>
           <div className="join-text">
-            틈새시간, 손틈새로
+            출퇴근 · 통학 틈새시간<br />
+            손틈새로 공부
           </div>
         </div>
         <div className="join-input">
-          <div className="input-header">
-            회원가입
-          </div>
           <div className="input-title">별명</div>
           <div className="input-wrap">
             <input

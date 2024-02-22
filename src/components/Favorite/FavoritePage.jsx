@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import Nav from '../Nav/Nav';
 import checkbox from '../../assets/img/Checkbox.png';
 
 function Favorite() {
@@ -53,19 +53,20 @@ function Favorite() {
     //api 호출
   }
   return (
-    <form onSubmit={handleFavoriteSubmit}>
-      <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
-      <ul className='favorite-wrap'>
-        {dummydata.map((dummy)=> 
-        <li key={dummy} className={`favorite-li ${selectedItems.includes(dummy) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(dummy)}>
-          {dummy}
-          {selectedItems.includes(dummy)&&<img src={checkbox} alt='checkbox' className='checkbox'/> }
-          
-          </li>)}
-        
-      </ul>
-      <button type="submit" className='checkbutton'>확인</button>
-    </form>
+    <>
+      <Nav />
+      <form onSubmit={handleFavoriteSubmit} className='favorite-form'>
+        <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
+        <ul className='favorite-wrap'>
+            {dummydata.map((dummy)=> 
+            <li key={dummy} className={`favorite-li ${selectedItems.includes(dummy) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(dummy)}>
+              {dummy}
+              {selectedItems.includes(dummy)&&<img src={checkbox} alt='checkbox' className='checkbox'/> }
+            </li>)}
+        </ul>
+        <button type="submit" className='checkbutton'>확인</button>
+      </form>
+    </>
   )
 }
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useNavigation } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import startHuman from '../../assets/img/start_human.png'
 import rightAB from '../../assets/img/mypage_backward.png'
@@ -7,7 +7,7 @@ import Clock from '../../assets/img/mainClock.svg'
 import Interest from '../../assets/img/interest.svg'
 import MainMoreItems from './MainMoreItems'
 import Nav from '../Nav/Nav'
-import Startpage from '../Startpage/Startpage'
+import Timeset from './../Timeset/Timeset';
 
 const dummydata = [{
     id: 1,
@@ -33,34 +33,17 @@ const dummydata = [{
 ]
 
 const Main = () => {
-    const [plusIs, setPlusIs] = useState(false);
     const navigate = useNavigate()
-    function handlePlusIs() {
-        setPlusIs(!plusIs)
+    function handleTimeset() {
+        navigate('/timeset')
     }
     function handleFavorite() {
         navigate('/favorite');
     }
 
-    const [firstVisit, setFirstVisit] = useState(false);
-
-    useEffect(() => {
-      if (!localStorage.getItem('visited')) {
-          setFirstVisit(true);
-          localStorage.setItem('visited', 'true');
-
-          const timer = setTimeout(() => {
-              navigate('/');  // 2초 후에 메인 페이지로 이동
-          }, 4000);
-
-          return () => clearTimeout(timer);  // 컴포넌트가 언마운트되면 타이머를 제거합니다.
-      }
-  }, [navigate]);
-
     return (
       <div className='main-container'>
-        {firstVisit && <Startpage/>}
-        {!firstVisit && <Nav/>}
+        <Nav/>
         <div className='main_wrap'>
             <div className="header">
                 <div className='header-start'>
@@ -80,7 +63,7 @@ const Main = () => {
                   </div>
                 </div>
                 <div className='subBtn-boxWrap'>
-                    <div className='subBtn-box'>
+                    <div className='subBtn-box' onClick={handleTimeset}>
                       <div className="box-header">
                         <div className="box-title">
                           시간 설정
@@ -92,7 +75,7 @@ const Main = () => {
                           출/퇴근 시간<br/>설정하기
                         </div>
                         <div className="box-icon">
-                          <img src={ Clock } alt="시계" />
+                          <img src={ Clock } alt="시계" style={{width:"32px"}}/>
                         </div>
                       </div>
                     </div>
@@ -109,7 +92,7 @@ const Main = () => {
                           설정하기
                         </div>
                         <div className="box-icon">
-                          <img src={ Interest } alt="관심" />
+                          <img src={ Interest } alt="관심" style={{width:"34px"}} />
                         </div>
                       </div>
                     </div>

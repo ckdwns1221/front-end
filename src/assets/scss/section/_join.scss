@@ -3,22 +3,20 @@
   padding: 60px 30px;
 
   .join-header {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    color: #93988F;
-    margin-top: 30px;
+    margin-top: 60px;
 
-
-    img {
-        width: 40px;
+    .join-title {
+      font-weight: 900;
+      font-size: 30px;
     }
 
     .join-text {
-      font-weight: bolder;
-      font-size: 20px;
-      margin: 7px 5px 0;
+      color: #93988F;
+      font-weight: 700;
+      line-height: 1.2;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
     }
   }
 
@@ -26,12 +24,6 @@
     padding-top: 10px;
     display: flex;
     flex-direction: column;
-
-    .input-header {
-      margin-top: 30px;
-      font-size: 24px;
-      font-weight: 900;
-    }
     
     .input-title{
       font-size: 12px;

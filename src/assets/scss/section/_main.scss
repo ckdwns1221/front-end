@@ -7,8 +7,7 @@
   }
 }
 .main-container {
-  position: relative;
-
+  min-height: 100vh;
 
   .main_wrap {
       display: flex;
@@ -200,46 +199,60 @@
                   padding-bottom: 10px;
                   margin-bottom: -10px;
                   white-space: nowrap;
+
+                  &::-webkit-scrollbar {
+                    height: 8px;  /* 스크롤바의 너비 */
+                  }
+                
+                  &::-webkit-scrollbar-thumb {
+                    height: 3px; /* 스크롤바의 길이 */
+                    background: #FF6D6D; /* 스크롤바의 색상 */
+                    border-radius: 10px;
+                  }
+                
+                  &::-webkit-scrollbar-track {
+                    background: linen;
+                    border-radius: 10px;
+                  }
   
-  
-              }
-  
-              .main-content-video {
-                  margin-top: 10px;
-                  margin-bottom: 10px;
-                  margin-right: 10px;
-                  width: 200px;
-                  //width: 100%;
-                  height: 100%;
-                  border-radius: 10px;
-  
-                  .main-content-footer {
-                      display: flex;
-                      justify-content: space-between;
-                      padding: 10px;
-                      background-color: #FF6D6D;
-                      width: auto;
-                      height: 60px;
-                      border-radius: 0 0 10px 10px;
-  
-                      .main-letter-wrap {
-                          flex-direction: column;
-  
-                          .main-footer-category {
-                              color: #FFFFFF;
-                              font-size: 11px;
-                              margin-left: 10px;
-  
-                          }
-  
-                          .main-footer-title {
-                              color: #FFFFFF;
-                              font-weight: 700;
-                              line-height: 30px;
-                              margin-left: 10px;
-  
+                  .main-content-video {
+                      margin-top: 10px;
+                      margin-bottom: 10px;
+                      margin-right: 10px;
+                      width: 200px;
+                      //width: 100%;
+                      height: 100%;
+                      border-radius: 10px;
+      
+                      .main-content-footer {
+                          display: flex;
+                          justify-content: space-between;
+                          padding: 10px;
+                          background-color: #FF6D6D;
+                          width: auto;
+                          height: 60px;
+                          border-radius: 0 0 10px 10px;
+      
+                          .main-letter-wrap {
+                              flex-direction: column;
+      
+                              .main-footer-category {
+                                  color: #FFFFFF;
+                                  font-size: 11px;
+                                  margin-left: 10px;
+      
+                              }
+      
+                              .main-footer-title {
+                                  color: #FFFFFF;
+                                  font-weight: 700;
+                                  line-height: 30px;
+                                  margin-left: 10px;
+      
+                              }
                           }
                       }
+  
   
                       .main-bookmark {
                           width: auto;
