@@ -12,7 +12,7 @@ const useLoginMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    (userData) => axios.post('https://3.34.197.56:443/api/users/login', userData),
+    async (userData) =>axios.post('https://3.34.197.56:443/api/users/login', userData),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('userData');

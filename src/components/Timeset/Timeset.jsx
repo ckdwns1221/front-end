@@ -14,7 +14,7 @@ const Timeset = () => {
     const [choose, setChoose] = useState('')
     const [choosestart, setChoosestart] = useState('출발지')
     const [choosearrive, setChoosearrive] = useState('도착지')
-
+    
     useEffect(() => {
         const setStartBtn = document.querySelector('.setStart');
         const setArriveBtn = document.querySelector('.setArrive');

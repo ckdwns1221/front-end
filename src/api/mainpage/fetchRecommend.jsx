@@ -1,9 +1,14 @@
+import axios from 'axios'
 import React from 'react'
 
-function fetchRecommend() {
-  return (
-    <div>fetchRecommend</div>
-  )
+async function fetchRecommend({userId,timeSecond}) {
+  try{
+    const response = await axios.get(`https://3.34.197.56:443/api/video/home/recommend/${userId}`)
+    return response.data
+  }
+  catch(error){
+    console.log(error)
+  }
 }
 
 export default fetchRecommend

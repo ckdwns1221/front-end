@@ -5,6 +5,7 @@ import MypageHeader from './MypageHeader'
 import MypageButton from './MypageButton'
 import Nav from '../Nav/Nav'
 import { Link, useNavigate } from 'react-router-dom'
+import fetchCalendar from '../../api/mypage/fetchCalendar'
 
 const Mypage = () => {
   const initialDate = new Date()
@@ -18,6 +19,20 @@ const Mypage = () => {
     setSelectedDate(utcDate)
     console.log(selectedDate)
   }
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchCalendar("lhj6364");
+        console.log('Fetched data:', data);
+        // 여기서 데이터를 활용할 수 있습니다.
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
  
   useEffect(() => {
     if (initialDate !== selectedDate) {
