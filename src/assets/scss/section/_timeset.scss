@@ -1,15 +1,15 @@
 .timeset_wrap {
-    padding: 60px 30px;
+    padding: 90px 30px 50px;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
 
-    >button {
+    .retrun_btn {
         background-color: #00000000;
         position: absolute;
         left: 30px;
 
         .return {
-            width: 15px;
+            width: 10px;
         }
     }
 
@@ -23,7 +23,6 @@
         background-color: var(--white200);
         width: 100%;
         outline: none;
-        margin-bottom: 5px;
         line-height: 1.5;
         align-items: center;
 
@@ -46,7 +45,6 @@
 
     >p {
         font-size: 20px;
-        margin-top: 60px;
         text-align: center;
         font-weight: 700;
         color: var(--black300);
@@ -54,6 +52,10 @@
         strong {
             font-weight: 900;
             color: var(--black);
+        }
+
+        button {
+            top: 90px;
         }
     }
 
@@ -78,7 +80,22 @@
             justify-content: space-between;
 
             img {
-                width: 25px;
+                width: 18px;
+            }
+        }
+
+        .search {
+            margin-top: 20px;
+            width: 100%;
+            align-items: center;
+
+            input {
+                width: 79%;
+            }
+
+            button {
+                margin-top: 0;
+                width: 20%;
             }
         }
 
@@ -143,30 +160,40 @@
         }
 
         button {
-            margin-top: 8px;
+            margin-top: 5px;
         }
     }
 
     .userinput {
-        padding-top: 30px;
+        padding-top: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        flex-direction: column;
 
-        input {
-            text-align: center;
-            line-height: 1.2px;
-            outline: none;
-            width: 130px;
-            border: 2px solid var(--maincolor01);
-            padding-top: 7px;
-            height: 50px;
-            border-radius: 15px;
-            margin-bottom: 8px;
-            font-size: 27px;
-            color: var(--black300);
-            font-weight: 700;
+        .input_box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+
+            input {
+                text-align: center;
+                line-height: 1.2px;
+                outline: none;
+                width: 130px;
+                border: 2px solid var(--maincolor01);
+                padding-top: 7px;
+                height: 50px;
+                border-radius: 15px;
+                margin-bottom: 8px;
+                font-size: 27px;
+                color: var(--black300);
+                font-weight: 700;
+            }
+
+           
         }
 
         p {
@@ -180,10 +207,13 @@
                 font-weight: 900;
             }
         }
-
-        button {
-            margin-top: 200px;
+        
+        .input_btn {
+            width: 100%;
+            margin-top: 50px;
         }
+
+        button {}
 
     }
 
@@ -257,6 +287,10 @@
             font-size: 34px;
             font-weight: 900;
         }
+    }
+
+    .going_btn {
+        margin-top: 10px;
     }
 }
 
