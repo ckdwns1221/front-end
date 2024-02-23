@@ -9,7 +9,6 @@ import checkbox from '../../assets/img/Checkbox.png';
 import postFavoriteList from '../../api/favorite/postFavoriteList';
 import {idState,nameState} from '../Login/Login'
 function Favorite() {
-  //전역상태관리를 통해 이름 동적으로 바꿀예정
   const [favoriteList,setFavoriteList] = useState([]);
   const [selectedItems,setSelectedItems] = useState([]);
   const userId = useRecoilValue(idState)
@@ -64,7 +63,7 @@ function Favorite() {
     <>
       <Nav />
       <form className='favorite-form' onSubmit={handleFavoriteSubmit}>
-        <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
+        <h2 className='favorite-header'>{userName}님이 관심있는 분야는 ?</h2>
         <ul className='favorite-wrap'>
           {favoriteList.map((category)=> 
           <li key={category.categoryId} className={`favorite-li ${selectedItems.includes(category) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(category)}>

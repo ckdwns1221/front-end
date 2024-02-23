@@ -30,7 +30,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={ id && name ? <Login /> : <Main />} />            
+            <Route path='/' element={ <Main/>} />           
             <Route path='/aboutRecommend' element={<MoreRecommend />} />
             <Route path='/aboutScrab' element={<MoreScrab />} />
             <Route path='/favorite' element={<Favorite />} />

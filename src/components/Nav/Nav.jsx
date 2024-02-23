@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logoImage from '../../assets/img/logo.png'
 import { useRecoilState } from 'recoil';
@@ -16,6 +16,7 @@ const Nav = () => {
     setId('');
     setName('');
   };
+ 
 
   return (
     <div className="Nav">
