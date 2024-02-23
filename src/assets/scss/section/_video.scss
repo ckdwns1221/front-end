@@ -2,6 +2,22 @@
     padding: 90px 30px 50px;
     height: 100vh;
 
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        height: 3px;
+        background: #FF6D6D;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: linen;
+        border-radius: 10px;
+    }
+
     .retrun_btn {
         background-color: #00000000;
 
@@ -24,10 +40,21 @@
         }
     }
 
+    .submit {
+        margin-top: 30px;
+        height: 45px;
+        background-color: var(--maincolor01);
+        color: var(--white);
+        border-radius: 10px;
+        font-weight: 700;
+        padding-top: 4px;
+        width: 100%;
+    }
+
     .video {
         border-radius: 30px;
         margin-top: 20px;
-        height: 80%;
+        height: 70%;
         background-color: #FFEAEA;
         overflow: auto;
         padding: 35px 25px;
@@ -146,9 +173,62 @@
     display: flex;
     justify-content: center;
     background-color: #000000ce;
+    position: relative;
+    overflow: hidden;
 
     .VideoDetail_wrap {
+        display: flex;
         transform: rotate(90deg);
         margin: auto;
+
+        button {
+            position: absolute;
+            background-color: #00000000;
+            width: 15px;
+            left: -50px;
+        }
+
+        .timer {
+            position: absolute;
+            right: -40px;
+            bottom: 30px;
+            display: flex;
+            color: var(--white);
+
+            .timer_box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                img {
+                    width: 30px;
+                }
+
+                >div {
+                    display: flex;
+                    height: 200px;
+                    align-items: flex-end;
+                    border-radius: 50px;
+                    margin: 3px 0;
+                    background-color: var(--white);
+
+                    .timerber {
+                        width: 20px;
+                        border-radius: 50px;
+                        background-color: var(--maincolor01);
+                        position: relative;
+
+                        img {
+                            position: absolute;
+                            right: -9px;
+                            top: -4px;
+                            width: 35px;
+                        }
+                    }
+
+                }
+            }
+
+        }
     }
 }

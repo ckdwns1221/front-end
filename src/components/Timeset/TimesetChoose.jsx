@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-import { fetchUserInfo } from '../../api/fetchUserInfo';
-import { useQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { idState } from '../Login/Login';
 
 const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, setChoosestart, setChoosearrive }) => {
     const [done, setDone] = useState(false)
     const [isDisabled, setIsDisabled] = useState(false)
     const [second, setSecond] = useState(0);
     const [minutes, setMinutes] = useState(0);
-    const { data, isLoading } = useQuery('userInfomation', () => fetchUserInfo('lhj6364'));
+    const userId = useRecoilValue(idState)
 
     const onSubmit = () => {
         if (choosestart === '출발지' || choosearrive === '도착지') {
@@ -48,7 +48,7 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
     
             console.log(RequestBody.time)
     
-            axios.put(`https://3.34.197.56/api/users/${data.data.userId}/change-time`, RequestBody)
+            axios.put(`https://3.34.197.56/api/users/${userId}/change-time`, RequestBody)
                 .then(response => {
                     console.log(response.data.message);
                 })
@@ -60,7 +60,7 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
     }, [second, minutes])
 
     useEffect(() => {
-        console.log(data.data.userId)
+        console.log('userId:', userId)
     }, [])
 
     return (

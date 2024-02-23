@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export async function fetchUserInfo({userId}) {
     try{
-        const response = await axios.get(`https://3.34.197.56:443/api/users/lhj6364/user-info`)
+        const response = await axios.get(`https://3.34.197.56:443/api/users/${userId}/user-info`)
         return response.data
     }
     catch(error){

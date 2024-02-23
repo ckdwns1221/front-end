@@ -4,10 +4,13 @@ import Place from '../../assets/img/timeset_place.svg'
 import PlaceBlue from '../../assets/img/timeset_placeblue.svg'
 import PlaceRed from '../../assets/img/timeset_placered.svg'
 import Return from '../../assets/img/timeset_retrun.svg'
+import { useRecoilValue } from 'recoil';
+import { nameState } from '../Login/Login';
 
 const TimesetTop = ({ setShow, setWitch, witch, show, choosestart, choosearrive }) => {
     const [PlaceIcon, setPlaceIcon] = useState(0)
     const navigate = useNavigate();
+    const userName = useRecoilValue(nameState)
 
     useEffect(() => {
         if (choosestart === '출발지' && choosearrive === '도착지') {
@@ -33,7 +36,7 @@ const TimesetTop = ({ setShow, setWitch, witch, show, choosestart, choosearrive 
                     <button className='retrun_btn' onClick={() => { setShow(false); setWitch(false) }}>
                         <img src={Return} alt="return" className='return' />
                     </button>
-                    <strong>이승민</strong>님의<br />
+                    <strong>{userName}</strong>님의<br />
                     출퇴근/등하교<br />
                     <strong>소요시간</strong>은
                 </p>
@@ -42,7 +45,7 @@ const TimesetTop = ({ setShow, setWitch, witch, show, choosestart, choosearrive 
                     <button onClick={goBack} className='retrun_btn'>
                         <img src={Return} alt="return" className='return' />
                     </button>
-                    <strong>이승민</strong>님의<br />
+                    <strong>{userName}</strong>님의<br />
                     출퇴근/등하교<br />
                     <strong>소요시간</strong>은
                 </p>

@@ -55,7 +55,7 @@ function Favorite() {
        console.log(error)
      }
   
-     navigate('/')
+     navigate('/videopage')
     
   }
   
