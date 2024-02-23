@@ -48,7 +48,7 @@ const App = () => {
             <Route path='/timesetplace' element={< TimesetStart />} />
 
             <Route path='/videopage' element={< Videopage />} />
-            <Route path='/videopage/:videoId' element={< VideoDetail />} />
+            <Route path='/videopage/:videourl' element={< VideoDetail />} />
 
             <Route path='/test' element={<Testfetch />} />
           </Routes>

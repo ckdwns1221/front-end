@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import postTime from '../../api/postTime'
-import { fetchUserInfo } from '../../api/fetchUserInfo';
-import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { idState } from '../Login/Login';
 
 const TimesetInput = ({ time, setTime, setWitch, witch }) => {
+    //const userId = useRecoilValue(idState)
     const { data, isLoading } = useQuery('userInfomation', () => fetchUserInfo('lhj1234'));
 
     const onSubmit = async (time) => {
@@ -15,6 +16,7 @@ const TimesetInput = ({ time, setTime, setWitch, witch }) => {
         }
         setWitch(true)
         try {
+            //const response = await postTime({ userId: userId, time })
             const response = await postTime({ userId: 'lhj1234', time })
             console.log("time: ", time)
 
@@ -30,6 +32,7 @@ const TimesetInput = ({ time, setTime, setWitch, witch }) => {
                 time: time
             };
 
+            //axios.put(`https://3.34.197.56/api/users/${userId}/change-time`, RequestBody)
             axios.put(`https://3.34.197.56/api/users/lhj1234/change-time`, RequestBody)
                 .then(response => {
                     console.log(response.data.message);
