@@ -108,6 +108,7 @@ function MoreRecommend() {
             <div className="more">
                 <div className="more-line"></div>
                 <ul className='more-content-wrap'>
+                    <div className="video-container"></div>
                     <MoreItems recommendList={recommendList} handleBookmark={handleBookmark} bookMarkStates={bookMarkStates} />
                 </ul>
             </div>

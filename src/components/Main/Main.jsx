@@ -37,6 +37,7 @@ const Main = () => {
     function handleFavorite() {
         navigate('/favorite');
     }
+    console.log("fetchuserInfo: ", data)
     
     // useEffect(()=>{
     //   const fetchData= async()=>{
