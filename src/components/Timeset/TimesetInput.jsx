@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
 const TimesetInput = ({ time, setTime, setWitch, witch }) => {
-    const { data, isLoading } = useQuery('userInfomation', () => fetchUserInfo('lhj6364'));
+    const { data, isLoading } = useQuery('userInfomation', () => fetchUserInfo('lhj1234'));
 
     const onSubmit = async (time) => {
         if (!(time)) {
@@ -15,7 +15,7 @@ const TimesetInput = ({ time, setTime, setWitch, witch }) => {
         }
         setWitch(true)
         try {
-            const response = await postTime({ userId: 'lhj6364', time })
+            const response = await postTime({ userId: 'lhj1234', time })
             console.log("time: ", time)
 
         }
@@ -30,7 +30,7 @@ const TimesetInput = ({ time, setTime, setWitch, witch }) => {
                 time: time
             };
 
-            axios.put(`https://3.34.197.56/api/users/${data.data.userId}/change-time`, RequestBody)
+            axios.put(`https://3.34.197.56/api/users/lhj1234/change-time`, RequestBody)
                 .then(response => {
                     console.log(response.data.message);
                 })

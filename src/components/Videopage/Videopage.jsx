@@ -4,13 +4,14 @@ import Return from '../../assets/img/timeset_retrun.svg';
 import View from '../../assets/img/video_view.svg';
 import { Watch } from "react-loader-spinner";
 import axios from 'axios';
+import ReactPlayer from 'react-player';
 import Nav from '../Nav/Nav';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../../api/fetchUserInfo';
 import { useQuery } from 'react-query';
 
 const Videopage = () => {
-    const { data, isLoading } = useQuery('userInfomation', () => fetchUserInfo('lhj6364'));
+    const { data, isLoading } = useQuery('userInfomation', () => fetchUserInfo('lhj1234'));
     const [videos, setVideos] = useState([]);
     const navigate = useNavigate();
     const [second, setTimesecond] = useState(0);
@@ -23,13 +24,27 @@ const Videopage = () => {
     }, [data]);
 
     useEffect(() => {
+      const fetchData=async()=>{
+        try{
+           await axios.get(`https://3.34.197.56/api/video/recommend/lhj1234?time=${second}`)
+        .then((res) => {
+            console.log(res.data.data.videos);
+            setVideos(res.data.data.videos);
+            console.log(videos)
+        });
+        }
+        catch(error){
+            console.log(error)
+        }
+      }
+      fetchData()
         if (data) {
-            axios.get(`https://3.34.197.56/api/video/recommend/${data.data.userId}?time=${second}`)
+            /* axios.get(`https://3.34.197.56/api/video/recommend/lhj1234?time=${second}`)
                 .then((res) => {
                     console.log(res.data.data.videos);
                     setVideos(res.data.data.videos);
                     console.log(videos)
-                });
+                }); */
         }
     }, [second]);
 
@@ -63,7 +78,7 @@ const Videopage = () => {
                         <button className='retrun_btn'  onClick={goBack} >
                             <img src={Return} alt="return" className='return' />
                         </button>
-                        <h2><strong>이승민</strong>님이<br /> 손틈새로 공부할 내용 </h2>
+                        <h2><strong>lhj</strong>님이<br /> 손틈새로 공부할 내용 </h2>
                         <div className='video'>
                             {videos.length > 0 ? (
                                 <>
@@ -75,6 +90,8 @@ const Videopage = () => {
                                                     <img src={View} alt="view" />
                                                     <p>{video.runTime}</p>
                                                 </div>
+                                            </div>
+                                            <div className='VideoDetail_wrap'>
                                             </div>
                                             <Link to={video.url}>
                                                 <div className="video_box">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
+import Return from '../../assets/img/timeset_retrun.svg';
 
 import fetchFavoriteList from '../../api/favorite/fetchFavoriteList';
 import Nav from '../Nav/Nav'
@@ -54,16 +55,24 @@ function Favorite() {
        console.log(error)
      }
   
-     navigate('/')
+     navigate('/videopage')
     
   }
+  const goBack = () => {
+    navigate(-1);
+};
   
  
   return (
     <>
       <Nav />
       <form className='favorite-form' onSubmit={handleFavoriteSubmit}>
-        <h2 className='favorite-header'>{userName}님이 관심있는 분야는 ?</h2>
+        <button className='return_btn'  onClick={goBack} >
+          <img src={Return} alt="return" className='return' />
+        </button>        
+        <h2 className='favorite-header'>
+          {userName}님이 관심있는 분야는 ?
+        </h2>
         <ul className='favorite-wrap'>
           {favoriteList.map((category)=> 
           <li key={category.categoryId} className={`favorite-li ${selectedItems.includes(category) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(category)}>
