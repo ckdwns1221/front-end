@@ -15,36 +15,19 @@ import Clock from '../../assets/img/mainClock.svg'
 import Interest from '../../assets/img/interest.svg'
 import Nav from '../Nav/Nav'
 import Startpage from '../Startpage/Startpage'
-import {idState} from '../Login/Login'
+import {idState,nameState} from '../Login/Login'
 import fetchMore from '../../api/mainpage/fetchScrap'
 import MoreItems from './More/MoreItems'
 import fetchScrap from '../../api/mainpage/fetchScrap'
 
-const dummydata = [{
-    id: 1,
-    category: '경제/금융',
-    title: '주식으로 돈 버는법',
-    videoUrl: 'https://youtu.be/CTpbD4Y0IFU?si=ja7sjUW1vzZ7fEaq',
-    time: '13',
-}, {
-    id: 2,
-    category: '마케팅',
-    title: '소비자의 마음을 사로잡는 커피',
-    videoUrl: 'https://youtu.be/kHp6qLsyu-U?si=_MM6lyoDBycnLiZH',
-    time: '18',
-},
-{
-    id: 3,
-    category: '마케팅',
-    title: '4P, 3C? 시장분석 용어정리',
-    videoUrl: 'https://youtu.be/kHp6qLsyu-U?si=_MM6lyoDBycnLiZH',
-    time: '18',
-},
-]
+
 
 const Main = () => {
-    const userId = useRecoilValue(idState)
-    const {data,isLoading,error} = useQuery('userInfomation',()=> fetchUserInfo(userId))
+  const userId = useRecoilValue(idState)
+  const userName = useRecoilValue(nameState);
+
+    const {data,isLoading,error} = useQuery('userInfomation',()=> fetchUserInfo({userId}))
+    //const [data, setData] =useState([])
     const [RecommendList,setRecommendList] = useState([])
     const [moreList,setMoreList] = useState([])
     const navigate = useNavigate()
@@ -55,7 +38,19 @@ const Main = () => {
         navigate('/favorite');
     }
     
-    console.log(JSON.stringify(data,null,2))
+    // useEffect(()=>{
+    //   const fetchData= async()=>{
+    //     try{
+    //       const response = await fetchUserInfo({userId})
+    //       console.log(response.data)
+    //       setData(response.data)
+    //     }
+    //     catch(error){
+    //       console.log(error)
+    //     }
+    //   }
+    //   fetchData()
+    // },[])
     useEffect(()=>{
         const fetchRecommendData = async() =>{
             const {userId,time} = data.data
@@ -92,9 +87,8 @@ const Main = () => {
             fetchMoreData();
         }
     },[data])
-    // useEffect(()=>{
-    //     UserInfo()
-    // },[])
+
+   
 
     return (
       <div className='main-container'>
@@ -157,7 +151,7 @@ const Main = () => {
                 <div className="main-line"></div>
                 <div className="propose">
                     <div className='propose_header'>
-                        <h2>{data?.data?.userName}님의 추천콘텐츠</h2>
+                        <h2>{userName}님의 추천콘텐츠</h2>
                         {/* {plusIs ? <MoreRecommend /> :<Link to='/' onClick={handlePlusIs}>더보기</Link> } */}
                         <Link to={{ pathname: '/aboutRecommend', state: { RecommendList } }}>더보기</Link>
                     </div>

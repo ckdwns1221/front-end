@@ -1,28 +1,29 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
 
-import bookmark_activity from '../../../assets/img/bookmark_activity.png'
-import bookmark_notactivity from '../../../assets/img/bookmark_notactivity.png'
+import bookmark_activity from '../../../assets/img/bookmark_activity.svg'
+import bookmark_notactivity from '../../../assets/img/bookmark_notactivity.svg'
+
 import history_sun from '../../../assets/img/history_sun.png'
 import history_time from '../../../assets/img/history_time.png'
 const dummydata = [{
   id: 1,
   category: '경제/금융',
-  title: '주식으로 돈 버는법',
-  videoUrl: 'https://youtu.be/CTpbD4Y0IFU?si=ja7sjUW1vzZ7fEaq',
+  title: '주식투자',
+  videoUrl: 'https://youtu.be/DN_g3K2i8P4?si=hI7aiSVc5vx1qLRd',
   time: '13',
 }, {
   id: 2,
   category: '마케팅',
-  title: '소비자의 마음을 사로잡는 커피',
-  videoUrl: 'https://youtu.be/kHp6qLsyu-U?si=_MM6lyoDBycnLiZH',
+  title: '2024년 마케팅 흐름',
+  videoUrl: 'https://youtu.be/FTymT5NMD5k?si=ojLlZLBkYBLSSxGR',
   time: '18',
 },
 {
   id: 3,
-  category: '마케팅',
-  title: '4P, 3C? 시장분석 용어정리',
-  videoUrl: 'https://youtu.be/kHp6qLsyu-U?si=_MM6lyoDBycnLiZH',
+  category: 'IT',
+  title: 'Promise란 무엇인가?!',
+  videoUrl: 'https://youtu.be/iUGLyhbwYkU?si=Y7kUpC4cQf7j6EV4',
   time: '18',
 },
 ]
