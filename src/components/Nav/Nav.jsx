@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoImage from '../../assets/img/logo.png'
+import { useRecoilState } from 'recoil';
+import { idState, nameState } from '../Login/Login';
 import 'animate.css';
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [id, setId] = useRecoilState(idState);
+  const [name, setName] = useRecoilState(nameState);
+
+  const handleLogout = () => {
+    localStorage.removeItem('id');
+    localStorage.removeItem('name');
+    setId('');
+    setName('');
+  };
 
   return (
     <div className="Nav">
@@ -27,9 +38,13 @@ const Nav = () => {
           <Link to='/favorite'>
             <li>관심 분야 선택</li>
           </Link>
-          <Link to='/login'>
-            <li>로그인</li>
-          </Link>
+          {id && name ? (
+            <li onClick={handleLogout}>로그아웃</li> 
+          ) : (
+            <Link to='/login'>
+              <li>로그인</li>
+            </Link>
+          )}
         </ul>
       )}
     </div>

@@ -29,16 +29,44 @@
         }
 
         .more-content-wrap {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+            padding: 25px;
+            height: 65vh;
+            overflow-y: scroll;
             justify-content: space-between;
             width: 100%;
+            background-color: #fbdcdc;
+            border-radius: 30px;
+
+            &::-webkit-scrollbar {
+              width: 8px;  /* 스크롤바의 너비 */
+            }
+          
+            &::-webkit-scrollbar-thumb {
+              height: 3px; /* 스크롤바의 길이 */
+              background: #FF6D6D; /* 스크롤바의 색상 */
+              border-radius: 10px;
+            }
+          
+            &::-webkit-scrollbar-track {
+              background: linen;
+              border-radius: 10px;
+            }
+            &::-webkit-scrollbar-button:vertical:start:decrement {
+              display: block;
+              height: 35px; 
+            }
+            &::-webkit-scrollbar-button:vertical:end:increment {
+              display: block;
+              height: 35px;
+            }
 
             .more-content-video {
                 padding: 10px 0;
                 margin: 0 auto;
-                width: 160px;
-                height: 100%;
+                width: 100%;
                 border-radius: 10px;
 
                 @media(max-width:400px){
@@ -81,26 +109,17 @@
                 }
             }
         }
+        
     }
 
-}
-
-
-
-.goBack_img {
-    margin-right: 0.5rem;
-    width: auto;
-    height: auto;
 }
 
 .video-container {
     position: relative;
-    width: 160px;
-    @media(max-width:400px){
-        width: 165px;
-    }
-    height: 0;
-    padding-bottom: 56.25%;
+    padding-top: 10px;
+    margin: 0 auto;
+    width: 90%;
+    height: auto;
     overflow: hidden;
 
     .react-player {

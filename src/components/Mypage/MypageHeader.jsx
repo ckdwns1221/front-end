@@ -7,7 +7,7 @@ function MypageHeader({name,time}) {
     <div className='mypage-header'>
         <p className='mypage-name'>{name}님은 틈새시간을</p>
         <h1 className='mypage-time'>{time}</h1>
-        <p className='mypage-sonteum'><span style={{color:'#006FFD'}}>손틈새로</span> 알차게 채웠어요</p>
+        <p className='mypage-sonteum'><span style={{color:'#006FFD', fontWeight:"bolder"}}>손틈새로</span> 알차게 채웠어요</p>
     </div>
   )
 }
