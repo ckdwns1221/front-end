@@ -10,8 +10,7 @@ import Mypage from './components/Mypage/Mypage'
 import Startpage from './components/Startpage/Startpage'
 import Timeset from './components/Timeset/Timeset'
 import Videopage from './components/Videopage/Videopage'
-import JoinCollect from './components/Join/JoinCollect'
-import LoginCollect from './components/Login/LoginCollect'
+import LoginCorrect from './components/Login/LoginCorrect'
 import TimesetStart from './components/Timeset/TimesetStart'
 import MoreRecommend from './components/Main/More/MoreRecommend'
 import MoreScrab from './components/Main/More/MoreScrab'
@@ -36,10 +35,9 @@ const App = () => {
             <Route path='/favorite' element={<Favorite />} />
 
             <Route path='/login' element={< Login />} />
-            <Route path='/logincollect' element={< LoginCollect />} />
+            <Route path='/logincorrect' element={< LoginCorrect />} />
 
             <Route path='/join' element={< Join />} />
-            <Route path='/joincollect' element={< JoinCollect />} />
 
             <Route path='/mypage' element={< Mypage />} />
             <Route path='/mypage/:userid/:date' element={<History />} />

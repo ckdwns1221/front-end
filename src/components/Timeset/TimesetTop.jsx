@@ -33,7 +33,7 @@ const TimesetTop = ({ setShow, setWitch, witch, show, choosestart, choosearrive 
                     <button className='retrun_btn' onClick={() => { setShow(false); setWitch(false) }}>
                         <img src={Return} alt="return" className='return' />
                     </button>
-                    <strong>이승민</strong>님의<br />
+                    <strong>lhj</strong>님의<br />
                     출퇴근/등하교<br />
                     <strong>소요시간</strong>은
                 </p>
@@ -42,7 +42,7 @@ const TimesetTop = ({ setShow, setWitch, witch, show, choosestart, choosearrive 
                     <button onClick={goBack} className='retrun_btn'>
                         <img src={Return} alt="return" className='return' />
                     </button>
-                    <strong>이승민</strong>님의<br />
+                    <strong>lhj</strong>님의<br />
                     출퇴근/등하교<br />
                     <strong>소요시간</strong>은
                 </p>

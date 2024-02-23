@@ -1,7 +1,7 @@
 .timeset_wrap {
     padding: 90px 30px 50px;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
 
     .retrun_btn {
         background-color: #00000000;
@@ -9,7 +9,7 @@
         left: 30px;
 
         .return {
-            width: 15px;
+            width: 10px;
         }
     }
 
@@ -45,7 +45,6 @@
 
     >p {
         font-size: 20px;
-        margin-top: 60px;
         text-align: center;
         font-weight: 700;
         color: var(--black300);
@@ -81,7 +80,7 @@
             justify-content: space-between;
 
             img {
-                width: 25px;
+                width: 18px;
             }
         }
 
