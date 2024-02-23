@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { RecoilRoot } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import Main from './components/Main/Main'
-import Login from './components/Login/Login'
+import Login, { idState, nameState } from './components/Login/Login'
 import Join from './components/Join/Join'
 import Mypage from './components/Mypage/Mypage'
 import Startpage from './components/Startpage/Startpage'
@@ -23,12 +23,14 @@ import Testfetch from './components/Login/fetchtest'
 const queryClient = new QueryClient();
 
 const App = () => {
+  const id = useRecoilValue(idState);
+  const name = useRecoilValue(nameState);
+  
   return (
-    <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Main />} />
+            <Route path='/' element={ id && name ? <Login /> : <Main />} />            
             <Route path='/aboutRecommend' element={<MoreRecommend />} />
             <Route path='/aboutScrab' element={<MoreScrab />} />
             <Route path='/favorite' element={<Favorite />} />
@@ -54,9 +56,6 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
-    </RecoilRoot>
-
-
   )
 }
 
