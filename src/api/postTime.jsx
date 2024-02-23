@@ -10,9 +10,7 @@ async function postTime({userId,time}) {
     catch(error){
         console.log(error)
     }
-  return (
-    <div>postTime</div>
-  )
+  
 }
 
 export default postTime

@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { RecoilRoot } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import Main from './components/Main/Main'
-import Login from './components/Login/Login'
+import Login, { idState, nameState } from './components/Login/Login'
 import Join from './components/Join/Join'
 import Mypage from './components/Mypage/Mypage'
 import Startpage from './components/Startpage/Startpage'
 import Timeset from './components/Timeset/Timeset'
 import Videopage from './components/Videopage/Videopage'
-import JoinCollect from './components/Join/JoinCollect'
-import LoginCollect from './components/Login/LoginCollect'
+import LoginCorrect from './components/Login/LoginCorrect'
 import TimesetStart from './components/Timeset/TimesetStart'
 import MoreRecommend from './components/Main/More/MoreRecommend'
 import MoreScrab from './components/Main/More/MoreScrab'
@@ -23,21 +22,22 @@ import Testfetch from './components/Login/fetchtest'
 const queryClient = new QueryClient();
 
 const App = () => {
+  const id = useRecoilValue(idState);
+  const name = useRecoilValue(nameState);
+  
   return (
-    <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Main />} />
+            <Route path='/' element={ <Main/>} />           
             <Route path='/aboutRecommend' element={<MoreRecommend />} />
             <Route path='/aboutScrab' element={<MoreScrab />} />
             <Route path='/favorite' element={<Favorite />} />
 
             <Route path='/login' element={< Login />} />
-            <Route path='/logincollect' element={< LoginCollect />} />
+            <Route path='/logincorrect' element={< LoginCorrect />} />
 
             <Route path='/join' element={< Join />} />
-            <Route path='/joincollect' element={< JoinCollect />} />
 
             <Route path='/mypage' element={< Mypage />} />
             <Route path='/mypage/:userid/:date' element={<History />} />
@@ -54,9 +54,6 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
-    </RecoilRoot>
-
-
   )
 }
 

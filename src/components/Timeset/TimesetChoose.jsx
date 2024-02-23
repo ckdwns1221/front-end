@@ -9,7 +9,8 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
     const [isDisabled, setIsDisabled] = useState(false)
     const [second, setSecond] = useState(0);
     const [minutes, setMinutes] = useState(0);
-    const userId = useRecoilValue(idState)
+   // const userId = useRecoilValue(idState)
+    const { data, isLoading } = useQuery('userInfomation', () => fetchUserInfo('lhj1234'));
 
     const onSubmit = () => {
         if (choosestart === '출발지' || choosearrive === '도착지') {
@@ -48,7 +49,8 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
     
             console.log(RequestBody.time)
     
-            axios.put(`https://3.34.197.56/api/users/${userId}/change-time`, RequestBody)
+            //axios.put(`https://3.34.197.56/api/users/${userId}/change-time`, RequestBody)
+            axios.put(`https://3.34.197.56/api/users/lhj1234/change-time`, RequestBody)
                 .then(response => {
                     console.log(response.data.message);
                 })
@@ -58,6 +60,7 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
         }
         
     }, [second, minutes])
+
 
     useEffect(() => {
         console.log('userId:', userId)
@@ -74,7 +77,7 @@ const TimesetChoose = ({ setShow, setAll, setChoose, choosestart, choosearrive, 
                 <>
                     <p className='time'><strong>{minutes}분</strong>소요</p>
                     <div className='going_btn'>
-                        <button><Link to='/favorite'>관심분야 체크하기</Link></button>
+                        <Link to='/favorite'><button>관심분야 체크하기</button></Link>
                         <button><Link to='/videopage'>영상 바로보기</Link></button>
                     </div>
                 </>

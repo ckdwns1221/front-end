@@ -3,6 +3,7 @@ import Return from '../../assets/img/timeset_retrun.svg';
 import View from '../../assets/img/video_view.svg';
 import { Watch } from "react-loader-spinner";
 import axios from 'axios';
+import ReactPlayer from 'react-player';
 import Nav from '../Nav/Nav';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -30,22 +31,43 @@ const Videopage = () => {
     }, [userId]);
 
     useEffect(() => {
-        if (userInfo) {
-            const fetchData = async () => {
-                try {
-                    const response = await axios.get(`https://3.34.197.56/api/video/recommend/${userId}?time=${second}`);
-                    if (response.data.data.videos.length > 0) {
-                        setVideos(response.data.data.videos);
-                        console.log('videos', videos)
-                        setGetVideo(true );
-                    } else {
-                        fetchData();
-                    }
-                } catch (error) {
-                    console.error('Error fetching videos:', error);
-                }
-            };
-            fetchData();
+//         if (userInfo) {
+//             const fetchData = async () => {
+//                 try {
+//                     const response = await axios.get(`https://3.34.197.56/api/video/recommend/${userId}?time=${second}`);
+//                     if (response.data.data.videos.length > 0) {
+//                         setVideos(response.data.data.videos);
+//                         console.log('videos', videos)
+//                         setGetVideo(true );
+//                     } else {
+//                         fetchData();
+//                     }
+//                 } catch (error) {
+//                     console.error('Error fetching videos:', error);
+//                 }
+//             };
+//             fetchData();
+      const fetchData=async()=>{
+        try{
+           await axios.get(`https://3.34.197.56/api/video/recommend/lhj1234?time=${second}`)
+        .then((res) => {
+            console.log(res.data.data.videos);
+            setVideos(res.data.data.videos);
+            console.log(videos)
+        });
+        }
+        catch(error){
+            console.log(error)
+        }
+      }
+      fetchData()
+        if (data) {
+            /* axios.get(`https://3.34.197.56/api/video/recommend/lhj1234?time=${second}`)
+                .then((res) => {
+                    console.log(res.data.data.videos);
+                    setVideos(res.data.data.videos);
+                    console.log(videos)
+                }); */
         }
     }, [second, userName, userId]);
 
@@ -79,30 +101,53 @@ const Videopage = () => {
                         <div className='video_wrap'>
                             {userInfo ? (
                                 <>
-                                    <button className='retrun_btn' onClick={goBack} >
-                                        <img src={Return} alt="return" className='return' />
-                                    </button>
-                                    <h2><strong>{userName}</strong>님이<br /> 손틈새로 공부할 내용 </h2>
-                                    <div className='video'>
-                                        {videos ? (
-                                            <>
-                                                {videos.map((video, key) => (
-                                                    <div className="video_detail" key={key}>
-                                                        <div className="header">
-                                                            <h3>{video.categoryId}</h3>
-                                                            <div>
-                                                                <img src={View} alt="view" />
-                                                                <p>{video.runTime}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div onClick={() => { setVideoUrl(video.url); setShow(true); setWatchList(prevList => [...prevList, video.videoId]);}}>
-                                                            <div className="video_box">
-                                                                <div>
-                                                                    <p className='cate'>{video.categoryId}</p>
-                                                                    <h4>{video.videoTitle}</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+//                                     <button className='retrun_btn' onClick={goBack} >
+//                                         <img src={Return} alt="return" className='return' />
+//                                     </button>
+//                                     <h2><strong>{userName}</strong>님이<br /> 손틈새로 공부할 내용 </h2>
+//                                     <div className='video'>
+//                                         {videos ? (
+//                                             <>
+//                                                 {videos.map((video, key) => (
+//                                                     <div className="video_detail" key={key}>
+//                                                         <div className="header">
+//                                                             <h3>{video.categoryId}</h3>
+//                                                             <div>
+//                                                                 <img src={View} alt="view" />
+//                                                                 <p>{video.runTime}</p>
+//                                                             </div>
+//                                                         </div>
+//                                                         <div onClick={() => { setVideoUrl(video.url); setShow(true); setWatchList(prevList => [...prevList, video.videoId]);}}>
+//                                                             <div className="video_box">
+//                                                                 <div>
+//                                                                     <p className='cate'>{video.categoryId}</p>
+//                                                                     <h4>{video.videoTitle}</h4>
+//                                                                 </div>
+//                                                             </div>
+//                                                         </div>
+                        <button className='retrun_btn'  onClick={goBack} >
+                            <img src={Return} alt="return" className='return' />
+                        </button>
+                        <h2><strong>lhj</strong>님이<br /> 손틈새로 공부할 내용 </h2>
+                        <div className='video'>
+                            {videos.length > 0 ? (
+                                <>
+                                    {videos.map((video, key) => (
+                                        <div className="video_detail" key={key}>
+                                            <div className="header">
+                                                <h3>{video.categoryId}</h3>
+                                                <div>
+                                                    <img src={View} alt="view" />
+                                                    <p>{video.runTime}</p>
+                                                </div>
+                                            </div>
+                                            <div className='VideoDetail_wrap'>
+                                            </div>
+                                            <Link to={video.url}>
+                                                <div className="video_box">
+                                                    <div>
+                                                        <p className='cate'>{video.categoryId}</p>
+                                                        <h4>{video.videoTitle}</h4>
                                                     </div>
                                                 ))}
                                             </>

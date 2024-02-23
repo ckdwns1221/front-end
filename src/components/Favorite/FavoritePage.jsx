@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
+import Return from '../../assets/img/timeset_retrun.svg';
 
 import fetchFavoriteList from '../../api/favorite/fetchFavoriteList';
 import Nav from '../Nav/Nav'
@@ -9,7 +10,6 @@ import checkbox from '../../assets/img/Checkbox.png';
 import postFavoriteList from '../../api/favorite/postFavoriteList';
 import {idState,nameState} from '../Login/Login'
 function Favorite() {
-  //전역상태관리를 통해 이름 동적으로 바꿀예정
   const [favoriteList,setFavoriteList] = useState([]);
   const [selectedItems,setSelectedItems] = useState([]);
   const userId = useRecoilValue(idState)
@@ -58,13 +58,21 @@ function Favorite() {
      navigate('/videopage')
     
   }
+  const goBack = () => {
+    navigate(-1);
+};
   
  
   return (
     <>
       <Nav />
       <form className='favorite-form' onSubmit={handleFavoriteSubmit}>
-        <h2 className='favorite-header'>이승민님이 관심있는 분야는 ?</h2>
+        <button className='return_btn'  onClick={goBack} >
+          <img src={Return} alt="return" className='return' />
+        </button>        
+        <h2 className='favorite-header'>
+          {userName}님이 관심있는 분야는 ?
+        </h2>
         <ul className='favorite-wrap'>
           {favoriteList.map((category)=> 
           <li key={category.categoryId} className={`favorite-li ${selectedItems.includes(category) ? 'selected' : ''}`} onClick={() => handleFavoriteClick(category)}>
