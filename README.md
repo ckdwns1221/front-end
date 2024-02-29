@@ -1,3 +1,5 @@
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=손틈새로%20-%20분초사회%202팀&fontSize=45&fontAlignY=40&desc=2024%20멋쟁이사자처럼%2012기%20트렌디톤%20&descAlign=80)
+
 <br><br>
 
 ## :fire: 팀명 및 주제
@@ -152,4 +154,3 @@
 </table>
 
 <br><br>
-
